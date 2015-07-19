@@ -2,7 +2,6 @@
 #define BATTERYICON_H_
 
 #include "SimpleIcon.h"
-#include "Defines.h"
 
 namespace MGUI
 {
@@ -15,16 +14,17 @@ public:
     virtual
     ~BatteryIcon();
 
-    BATTERY_STATES
+    BatteryState
     getBatteryState() const;
 
     void
-    setBatteryState(BATTERY_STATES iconState);
+    setBatteryState(BatteryState iconState);
 
 private:
-    BATTERY_STATES _batteryState;
+    BatteryState _batteryState;
 };
 
 } /* namespace MGUI */
 
 #endif /* BATTERYICON_H_ */
+

@@ -10,6 +10,7 @@ StatusBar::StatusBar(ilixi::Widget* parent)
           _batteryIcon(NULL)
 {
     ilixi::HBoxLayout* layout = new ilixi::HBoxLayout();
+    layout->setSpacing(0);
     layout->setVerticalAlignment(ilixi::Alignment::Middle);
     setLayout(layout);
 
@@ -17,6 +18,24 @@ StatusBar::StatusBar(ilixi::Widget* parent)
     addWidget(_clock);
 
     addWidget(new ilixi::Spacer());
+
+    _simIcon = new SimIcon();
+    addWidget(_simIcon);
+
+    _sdcardIcon = new SDCardIcon();
+    addWidget(_sdcardIcon);
+
+    _wifiIcon = new WiFiIcon();
+    addWidget(_wifiIcon);
+
+    _cellularIcon = new CellularIcon();
+    addWidget(_cellularIcon);
+
+    _gpsIcon = new GPSIcon();
+    addWidget(_gpsIcon);
+
+    _bluetoothIcon = new BTIcon();
+    addWidget(_bluetoothIcon);
 
     _batteryIcon = new BatteryIcon();
     addWidget(_batteryIcon);

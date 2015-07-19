@@ -33,6 +33,7 @@ SimpleIcon::setImage(const std::string& name)
     if (_image)
         delete _image;
     _image = __iconPack->getIcon(name);
+    update();
 }
 
 void

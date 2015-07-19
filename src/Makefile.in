@@ -91,10 +91,13 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_ilixi_mgui_OBJECTS = ilixi_mgui-main.$(OBJEXT) \
-	ilixi_mgui-MGuiApplication.$(OBJEXT) \
-	ilixi_mgui-StatusBar.$(OBJEXT) ilixi_mgui-BottomBar.$(OBJEXT) \
 	ilixi_mgui-BatteryIcon.$(OBJEXT) \
-	ilixi_mgui-SimpleIcon.$(OBJEXT)
+	ilixi_mgui-BottomBar.$(OBJEXT) ilixi_mgui-BTIcon.$(OBJEXT) \
+	ilixi_mgui-CellularIcon.$(OBJEXT) ilixi_mgui-GPSIcon.$(OBJEXT) \
+	ilixi_mgui-MGuiApplication.$(OBJEXT) \
+	ilixi_mgui-SDCardIcon.$(OBJEXT) ilixi_mgui-SimIcon.$(OBJEXT) \
+	ilixi_mgui-SimpleIcon.$(OBJEXT) ilixi_mgui-StatusBar.$(OBJEXT) \
+	ilixi_mgui-WiFiIcon.$(OBJEXT)
 ilixi_mgui_OBJECTS = $(am_ilixi_mgui_OBJECTS)
 am__DEPENDENCIES_1 =
 ilixi_mgui_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -270,17 +273,29 @@ top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I build ${ACLOCAL_FLAGS}
 AM_CFLAGS = -DDATADIR=\"$(MGUI_DATADIR)\"
 ilixi_mgui_SOURCES = main.cpp \
-			Defines.h \
-			MGuiApplication.cpp \
-			MGuiApplication.h \
-			StatusBar.cpp \
-			StatusBar.h \
-			BottomBar.cpp \
-			BottomBar.h \
+			MGuiPlatform.h \
 			BatteryIcon.cpp \
 			BatteryIcon.h \
+			BottomBar.cpp \
+			BottomBar.h \
+			BTIcon.cpp \
+			BTIcon.h \
+			CellularIcon.cpp \
+			CellularIcon.h \
+			GPSIcon.cpp \
+			GPSIcon.h \
+			MGuiApplication.cpp \
+			MGuiApplication.h \
+			SDCardIcon.cpp \
+			SDCardIcon.h \
+			SimIcon.cpp \
+			SimIcon.h \
 			SimpleIcon.cpp \
-			SimpleIcon.h
+			SimpleIcon.h \
+			StatusBar.cpp \
+			StatusBar.h \
+			WiFiIcon.cpp \
+			WiFiIcon.h
 
 ilixi_mgui_CPPFLAGS = $(AM_CFLAGS) $(ILIXI_CFLAGS)
 ilixi_mgui_LDADD = $(AM_LDFLAGS) $(ILIXI_LIBS)
@@ -371,11 +386,17 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-BTIcon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-BatteryIcon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-BottomBar.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-CellularIcon.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-GPSIcon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-MGuiApplication.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-SDCardIcon.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-SimIcon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-SimpleIcon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-StatusBar.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-WiFiIcon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-main.Po@am__quote@
 
 .cpp.o:
@@ -406,33 +427,19 @@ ilixi_mgui-main.obj: main.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-main.obj `if test -f 'main.cpp'; then $(CYGPATH_W) 'main.cpp'; else $(CYGPATH_W) '$(srcdir)/main.cpp'; fi`
 
-ilixi_mgui-MGuiApplication.o: MGuiApplication.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-MGuiApplication.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-MGuiApplication.Tpo -c -o ilixi_mgui-MGuiApplication.o `test -f 'MGuiApplication.cpp' || echo '$(srcdir)/'`MGuiApplication.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-MGuiApplication.Tpo $(DEPDIR)/ilixi_mgui-MGuiApplication.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='MGuiApplication.cpp' object='ilixi_mgui-MGuiApplication.o' libtool=no @AMDEPBACKSLASH@
+ilixi_mgui-BatteryIcon.o: BatteryIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-BatteryIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-BatteryIcon.Tpo -c -o ilixi_mgui-BatteryIcon.o `test -f 'BatteryIcon.cpp' || echo '$(srcdir)/'`BatteryIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-BatteryIcon.Tpo $(DEPDIR)/ilixi_mgui-BatteryIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='BatteryIcon.cpp' object='ilixi_mgui-BatteryIcon.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-MGuiApplication.o `test -f 'MGuiApplication.cpp' || echo '$(srcdir)/'`MGuiApplication.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-BatteryIcon.o `test -f 'BatteryIcon.cpp' || echo '$(srcdir)/'`BatteryIcon.cpp
 
-ilixi_mgui-MGuiApplication.obj: MGuiApplication.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-MGuiApplication.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-MGuiApplication.Tpo -c -o ilixi_mgui-MGuiApplication.obj `if test -f 'MGuiApplication.cpp'; then $(CYGPATH_W) 'MGuiApplication.cpp'; else $(CYGPATH_W) '$(srcdir)/MGuiApplication.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-MGuiApplication.Tpo $(DEPDIR)/ilixi_mgui-MGuiApplication.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='MGuiApplication.cpp' object='ilixi_mgui-MGuiApplication.obj' libtool=no @AMDEPBACKSLASH@
+ilixi_mgui-BatteryIcon.obj: BatteryIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-BatteryIcon.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-BatteryIcon.Tpo -c -o ilixi_mgui-BatteryIcon.obj `if test -f 'BatteryIcon.cpp'; then $(CYGPATH_W) 'BatteryIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/BatteryIcon.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-BatteryIcon.Tpo $(DEPDIR)/ilixi_mgui-BatteryIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='BatteryIcon.cpp' object='ilixi_mgui-BatteryIcon.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-MGuiApplication.obj `if test -f 'MGuiApplication.cpp'; then $(CYGPATH_W) 'MGuiApplication.cpp'; else $(CYGPATH_W) '$(srcdir)/MGuiApplication.cpp'; fi`
-
-ilixi_mgui-StatusBar.o: StatusBar.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-StatusBar.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-StatusBar.Tpo -c -o ilixi_mgui-StatusBar.o `test -f 'StatusBar.cpp' || echo '$(srcdir)/'`StatusBar.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-StatusBar.Tpo $(DEPDIR)/ilixi_mgui-StatusBar.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='StatusBar.cpp' object='ilixi_mgui-StatusBar.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-StatusBar.o `test -f 'StatusBar.cpp' || echo '$(srcdir)/'`StatusBar.cpp
-
-ilixi_mgui-StatusBar.obj: StatusBar.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-StatusBar.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-StatusBar.Tpo -c -o ilixi_mgui-StatusBar.obj `if test -f 'StatusBar.cpp'; then $(CYGPATH_W) 'StatusBar.cpp'; else $(CYGPATH_W) '$(srcdir)/StatusBar.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-StatusBar.Tpo $(DEPDIR)/ilixi_mgui-StatusBar.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='StatusBar.cpp' object='ilixi_mgui-StatusBar.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-StatusBar.obj `if test -f 'StatusBar.cpp'; then $(CYGPATH_W) 'StatusBar.cpp'; else $(CYGPATH_W) '$(srcdir)/StatusBar.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-BatteryIcon.obj `if test -f 'BatteryIcon.cpp'; then $(CYGPATH_W) 'BatteryIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/BatteryIcon.cpp'; fi`
 
 ilixi_mgui-BottomBar.o: BottomBar.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-BottomBar.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-BottomBar.Tpo -c -o ilixi_mgui-BottomBar.o `test -f 'BottomBar.cpp' || echo '$(srcdir)/'`BottomBar.cpp
@@ -448,19 +455,89 @@ ilixi_mgui-BottomBar.obj: BottomBar.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-BottomBar.obj `if test -f 'BottomBar.cpp'; then $(CYGPATH_W) 'BottomBar.cpp'; else $(CYGPATH_W) '$(srcdir)/BottomBar.cpp'; fi`
 
-ilixi_mgui-BatteryIcon.o: BatteryIcon.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-BatteryIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-BatteryIcon.Tpo -c -o ilixi_mgui-BatteryIcon.o `test -f 'BatteryIcon.cpp' || echo '$(srcdir)/'`BatteryIcon.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-BatteryIcon.Tpo $(DEPDIR)/ilixi_mgui-BatteryIcon.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='BatteryIcon.cpp' object='ilixi_mgui-BatteryIcon.o' libtool=no @AMDEPBACKSLASH@
+ilixi_mgui-BTIcon.o: BTIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-BTIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-BTIcon.Tpo -c -o ilixi_mgui-BTIcon.o `test -f 'BTIcon.cpp' || echo '$(srcdir)/'`BTIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-BTIcon.Tpo $(DEPDIR)/ilixi_mgui-BTIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='BTIcon.cpp' object='ilixi_mgui-BTIcon.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-BatteryIcon.o `test -f 'BatteryIcon.cpp' || echo '$(srcdir)/'`BatteryIcon.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-BTIcon.o `test -f 'BTIcon.cpp' || echo '$(srcdir)/'`BTIcon.cpp
 
-ilixi_mgui-BatteryIcon.obj: BatteryIcon.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-BatteryIcon.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-BatteryIcon.Tpo -c -o ilixi_mgui-BatteryIcon.obj `if test -f 'BatteryIcon.cpp'; then $(CYGPATH_W) 'BatteryIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/BatteryIcon.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-BatteryIcon.Tpo $(DEPDIR)/ilixi_mgui-BatteryIcon.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='BatteryIcon.cpp' object='ilixi_mgui-BatteryIcon.obj' libtool=no @AMDEPBACKSLASH@
+ilixi_mgui-BTIcon.obj: BTIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-BTIcon.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-BTIcon.Tpo -c -o ilixi_mgui-BTIcon.obj `if test -f 'BTIcon.cpp'; then $(CYGPATH_W) 'BTIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/BTIcon.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-BTIcon.Tpo $(DEPDIR)/ilixi_mgui-BTIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='BTIcon.cpp' object='ilixi_mgui-BTIcon.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-BatteryIcon.obj `if test -f 'BatteryIcon.cpp'; then $(CYGPATH_W) 'BatteryIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/BatteryIcon.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-BTIcon.obj `if test -f 'BTIcon.cpp'; then $(CYGPATH_W) 'BTIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/BTIcon.cpp'; fi`
+
+ilixi_mgui-CellularIcon.o: CellularIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-CellularIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-CellularIcon.Tpo -c -o ilixi_mgui-CellularIcon.o `test -f 'CellularIcon.cpp' || echo '$(srcdir)/'`CellularIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-CellularIcon.Tpo $(DEPDIR)/ilixi_mgui-CellularIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='CellularIcon.cpp' object='ilixi_mgui-CellularIcon.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-CellularIcon.o `test -f 'CellularIcon.cpp' || echo '$(srcdir)/'`CellularIcon.cpp
+
+ilixi_mgui-CellularIcon.obj: CellularIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-CellularIcon.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-CellularIcon.Tpo -c -o ilixi_mgui-CellularIcon.obj `if test -f 'CellularIcon.cpp'; then $(CYGPATH_W) 'CellularIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/CellularIcon.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-CellularIcon.Tpo $(DEPDIR)/ilixi_mgui-CellularIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='CellularIcon.cpp' object='ilixi_mgui-CellularIcon.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-CellularIcon.obj `if test -f 'CellularIcon.cpp'; then $(CYGPATH_W) 'CellularIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/CellularIcon.cpp'; fi`
+
+ilixi_mgui-GPSIcon.o: GPSIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-GPSIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-GPSIcon.Tpo -c -o ilixi_mgui-GPSIcon.o `test -f 'GPSIcon.cpp' || echo '$(srcdir)/'`GPSIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-GPSIcon.Tpo $(DEPDIR)/ilixi_mgui-GPSIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='GPSIcon.cpp' object='ilixi_mgui-GPSIcon.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-GPSIcon.o `test -f 'GPSIcon.cpp' || echo '$(srcdir)/'`GPSIcon.cpp
+
+ilixi_mgui-GPSIcon.obj: GPSIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-GPSIcon.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-GPSIcon.Tpo -c -o ilixi_mgui-GPSIcon.obj `if test -f 'GPSIcon.cpp'; then $(CYGPATH_W) 'GPSIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/GPSIcon.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-GPSIcon.Tpo $(DEPDIR)/ilixi_mgui-GPSIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='GPSIcon.cpp' object='ilixi_mgui-GPSIcon.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-GPSIcon.obj `if test -f 'GPSIcon.cpp'; then $(CYGPATH_W) 'GPSIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/GPSIcon.cpp'; fi`
+
+ilixi_mgui-MGuiApplication.o: MGuiApplication.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-MGuiApplication.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-MGuiApplication.Tpo -c -o ilixi_mgui-MGuiApplication.o `test -f 'MGuiApplication.cpp' || echo '$(srcdir)/'`MGuiApplication.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-MGuiApplication.Tpo $(DEPDIR)/ilixi_mgui-MGuiApplication.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='MGuiApplication.cpp' object='ilixi_mgui-MGuiApplication.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-MGuiApplication.o `test -f 'MGuiApplication.cpp' || echo '$(srcdir)/'`MGuiApplication.cpp
+
+ilixi_mgui-MGuiApplication.obj: MGuiApplication.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-MGuiApplication.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-MGuiApplication.Tpo -c -o ilixi_mgui-MGuiApplication.obj `if test -f 'MGuiApplication.cpp'; then $(CYGPATH_W) 'MGuiApplication.cpp'; else $(CYGPATH_W) '$(srcdir)/MGuiApplication.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-MGuiApplication.Tpo $(DEPDIR)/ilixi_mgui-MGuiApplication.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='MGuiApplication.cpp' object='ilixi_mgui-MGuiApplication.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-MGuiApplication.obj `if test -f 'MGuiApplication.cpp'; then $(CYGPATH_W) 'MGuiApplication.cpp'; else $(CYGPATH_W) '$(srcdir)/MGuiApplication.cpp'; fi`
+
+ilixi_mgui-SDCardIcon.o: SDCardIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-SDCardIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-SDCardIcon.Tpo -c -o ilixi_mgui-SDCardIcon.o `test -f 'SDCardIcon.cpp' || echo '$(srcdir)/'`SDCardIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-SDCardIcon.Tpo $(DEPDIR)/ilixi_mgui-SDCardIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='SDCardIcon.cpp' object='ilixi_mgui-SDCardIcon.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-SDCardIcon.o `test -f 'SDCardIcon.cpp' || echo '$(srcdir)/'`SDCardIcon.cpp
+
+ilixi_mgui-SDCardIcon.obj: SDCardIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-SDCardIcon.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-SDCardIcon.Tpo -c -o ilixi_mgui-SDCardIcon.obj `if test -f 'SDCardIcon.cpp'; then $(CYGPATH_W) 'SDCardIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/SDCardIcon.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-SDCardIcon.Tpo $(DEPDIR)/ilixi_mgui-SDCardIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='SDCardIcon.cpp' object='ilixi_mgui-SDCardIcon.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-SDCardIcon.obj `if test -f 'SDCardIcon.cpp'; then $(CYGPATH_W) 'SDCardIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/SDCardIcon.cpp'; fi`
+
+ilixi_mgui-SimIcon.o: SimIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-SimIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-SimIcon.Tpo -c -o ilixi_mgui-SimIcon.o `test -f 'SimIcon.cpp' || echo '$(srcdir)/'`SimIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-SimIcon.Tpo $(DEPDIR)/ilixi_mgui-SimIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='SimIcon.cpp' object='ilixi_mgui-SimIcon.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-SimIcon.o `test -f 'SimIcon.cpp' || echo '$(srcdir)/'`SimIcon.cpp
+
+ilixi_mgui-SimIcon.obj: SimIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-SimIcon.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-SimIcon.Tpo -c -o ilixi_mgui-SimIcon.obj `if test -f 'SimIcon.cpp'; then $(CYGPATH_W) 'SimIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/SimIcon.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-SimIcon.Tpo $(DEPDIR)/ilixi_mgui-SimIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='SimIcon.cpp' object='ilixi_mgui-SimIcon.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-SimIcon.obj `if test -f 'SimIcon.cpp'; then $(CYGPATH_W) 'SimIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/SimIcon.cpp'; fi`
 
 ilixi_mgui-SimpleIcon.o: SimpleIcon.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-SimpleIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-SimpleIcon.Tpo -c -o ilixi_mgui-SimpleIcon.o `test -f 'SimpleIcon.cpp' || echo '$(srcdir)/'`SimpleIcon.cpp
@@ -475,6 +552,34 @@ ilixi_mgui-SimpleIcon.obj: SimpleIcon.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='SimpleIcon.cpp' object='ilixi_mgui-SimpleIcon.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-SimpleIcon.obj `if test -f 'SimpleIcon.cpp'; then $(CYGPATH_W) 'SimpleIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/SimpleIcon.cpp'; fi`
+
+ilixi_mgui-StatusBar.o: StatusBar.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-StatusBar.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-StatusBar.Tpo -c -o ilixi_mgui-StatusBar.o `test -f 'StatusBar.cpp' || echo '$(srcdir)/'`StatusBar.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-StatusBar.Tpo $(DEPDIR)/ilixi_mgui-StatusBar.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='StatusBar.cpp' object='ilixi_mgui-StatusBar.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-StatusBar.o `test -f 'StatusBar.cpp' || echo '$(srcdir)/'`StatusBar.cpp
+
+ilixi_mgui-StatusBar.obj: StatusBar.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-StatusBar.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-StatusBar.Tpo -c -o ilixi_mgui-StatusBar.obj `if test -f 'StatusBar.cpp'; then $(CYGPATH_W) 'StatusBar.cpp'; else $(CYGPATH_W) '$(srcdir)/StatusBar.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-StatusBar.Tpo $(DEPDIR)/ilixi_mgui-StatusBar.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='StatusBar.cpp' object='ilixi_mgui-StatusBar.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-StatusBar.obj `if test -f 'StatusBar.cpp'; then $(CYGPATH_W) 'StatusBar.cpp'; else $(CYGPATH_W) '$(srcdir)/StatusBar.cpp'; fi`
+
+ilixi_mgui-WiFiIcon.o: WiFiIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-WiFiIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-WiFiIcon.Tpo -c -o ilixi_mgui-WiFiIcon.o `test -f 'WiFiIcon.cpp' || echo '$(srcdir)/'`WiFiIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-WiFiIcon.Tpo $(DEPDIR)/ilixi_mgui-WiFiIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='WiFiIcon.cpp' object='ilixi_mgui-WiFiIcon.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-WiFiIcon.o `test -f 'WiFiIcon.cpp' || echo '$(srcdir)/'`WiFiIcon.cpp
+
+ilixi_mgui-WiFiIcon.obj: WiFiIcon.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-WiFiIcon.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-WiFiIcon.Tpo -c -o ilixi_mgui-WiFiIcon.obj `if test -f 'WiFiIcon.cpp'; then $(CYGPATH_W) 'WiFiIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/WiFiIcon.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-WiFiIcon.Tpo $(DEPDIR)/ilixi_mgui-WiFiIcon.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='WiFiIcon.cpp' object='ilixi_mgui-WiFiIcon.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-WiFiIcon.obj `if test -f 'WiFiIcon.cpp'; then $(CYGPATH_W) 'WiFiIcon.cpp'; else $(CYGPATH_W) '$(srcdir)/WiFiIcon.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique

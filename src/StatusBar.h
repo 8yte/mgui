@@ -6,6 +6,12 @@
 #include <lib/Timer.h>
 
 #include "BatteryIcon.h"
+#include "BTIcon.h"
+#include "CellularIcon.h"
+#include "GPSIcon.h"
+#include "SDCardIcon.h"
+#include "SimIcon.h"
+#include "WiFiIcon.h"
 
 namespace MGUI
 {
@@ -34,9 +40,19 @@ protected:
 private:
     ilixi::Label* _clock;
     ilixi::Timer* _timer;
+
     BatteryIcon* _batteryIcon;
+    BTIcon* _bluetoothIcon;
+    CellularIcon* _cellularIcon;
+    GPSIcon* _gpsIcon;
+    SDCardIcon* _sdcardIcon;
+    SimIcon* _simIcon;
+    WiFiIcon* _wifiIcon;
 };
 
 } /* namespace MGUI */
 
 #endif /* STATUSBAR_H_ */
+
+
+

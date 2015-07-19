@@ -1,10 +1,3 @@
-/*
- * BatteryIcon.cpp
- *
- *  Created on: Jul 17, 2015
- *      Author: tarik
- */
-
 #include "BatteryIcon.h"
 
 namespace MGUI
@@ -12,90 +5,76 @@ namespace MGUI
 
 BatteryIcon::BatteryIcon(Widget* parent)
         : SimpleIcon(parent),
-          _batteryState(BATTERY_NONE)
+          _batteryState(BatteryAlert)
 {
-    setBatteryState(BATTERY_CHARGING_10);
+    setBatteryState(BatteryUnknown);
 }
 
 BatteryIcon::~BatteryIcon()
 {
 }
 
-BATTERY_STATES
+BatteryState
 BatteryIcon::getBatteryState() const
 {
     return _batteryState;
 }
 
 void
-BatteryIcon::setBatteryState(BATTERY_STATES batteryState)
+BatteryIcon::setBatteryState(BatteryState batteryState)
 {
     if (_batteryState != batteryState)
     {
         _batteryState = batteryState;
         switch (batteryState)
         {
-            case BATTERY_CHARGING_10:
-                setImage("charging10");
+            case BatteryCharging20:
+                setImage("battery_20_charging");
                 break;
-            case BATTERY_CHARGING_20:
-                setImage("charging20");
+            case BatteryCharging30:
+                setImage("battery_30_charging");
                 break;
-            case BATTERY_CHARGING_30:
-                setImage("charging30");
+            case BatteryCharging50:
+                setImage("battery_50_charging");
                 break;
-            case BATTERY_CHARGING_40:
-                setImage("charging40");
+            case BatteryCharging60:
+                setImage("battery_60_charging");
                 break;
-            case BATTERY_CHARGING_50:
-                setImage("charging50");
+            case BatteryCharging80:
+                setImage("battery_80_charging");
                 break;
-            case BATTERY_CHARGING_60:
-                setImage("charging60");
+            case BatteryCharging90:
+                setImage("battery_90_charging");
                 break;
-            case BATTERY_CHARGING_70:
-                setImage("charging70");
+            case BatteryCharging100:
+                setImage("battery_100_charging");
                 break;
-            case BATTERY_CHARGING_80:
-                setImage("charging80");
+            case Battery20:
+                setImage("battery_20");
                 break;
-            case BATTERY_CHARGING_90:
-                setImage("charging90");
+            case Battery30:
+                setImage("battery_30");
                 break;
-            case BATTERY_CHARGING_100:
-                setImage("charging100");
+            case Battery50:
+                setImage("battery_50");
                 break;
-            case BATTERY_DISCHARGING_10:
-                setImage("discharging10");
+            case Battery60:
+                setImage("battery_60");
                 break;
-            case BATTERY_DISCHARGING_20:
-                setImage("discharging20");
+            case Battery80:
+                setImage("battery_80");
                 break;
-            case BATTERY_DISCHARGING_30:
-                setImage("discharging30");
+            case Battery90:
+                setImage("battery_90");
                 break;
-            case BATTERY_DISCHARGING_40:
-                setImage("discharging40");
+            case Battery100:
+                setImage("battery_100");
                 break;
-            case BATTERY_DISCHARGING_50:
-                setImage("discharging50");
-                break;
-            case BATTERY_DISCHARGING_60:
-                setImage("discharging60");
-                break;
-            case BATTERY_DISCHARGING_70:
-                setImage("discharging70");
-                break;
-            case BATTERY_DISCHARGING_80:
-                setImage("discharging80");
-                break;
-            case BATTERY_DISCHARGING_90:
-                setImage("discharging90");
-                break;
-            case BATTERY_DISCHARGING_100:
-                setImage("discharging100");
+            case BatteryAlert:
+                setImage("battery_alert");
                 break;
             default:
+                setImage("battery_unknown");
                 break;
         }
     }

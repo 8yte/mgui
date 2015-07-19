@@ -1,14 +1,9 @@
-/*
- * SimpleIcon.h
- *
- *  Created on: Jul 17, 2015
- *      Author: tarik
- */
-
 #ifndef SIMPLEICON_H_
 #define SIMPLEICON_H_
 
 #include <ui/Widget.h>
+
+#include "MGuiPlatform.h"
 
 namespace ilixi
 {
@@ -21,7 +16,7 @@ namespace MGUI
 class SimpleIcon : public ilixi::Widget
 {
 public:
-    SimpleIcon(Widget* parent = NULL);
+    SimpleIcon(ilixi::Widget* parent = NULL);
 
     virtual
     ~SimpleIcon();
