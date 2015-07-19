@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE FontPack PUBLIC "-//ilixi//DTD Fonts v2//EN" "http://www.ilixi.org/dtd/font_pack.dtd">
+<FontPack>
+	<ButtonFont>
+		<Name>Sans</Name>
+		<Size>16</Size>
+		<FontStyle>bold</FontStyle>
+	</ButtonFont>
+
+	<DefaultFont>
+		<Name>Sans</Name>
+		<Size>14</Size>
+	</DefaultFont>
+
+	<InputFont>
+		<Name>Sans</Name>
+		<Size>16</Size>
+	</InputFont>
+
+	<TitleFont>
+		<Name>Sans</Name>
+		<Size>16</Size>
+		<FontStyle>bold</FontStyle>
+	</TitleFont>
+
+	<InfoFont>
+		<Name>Sans</Name>
+		<Size>12</Size>
+	</InfoFont>
+
+	<CustomFont name="buttonFont1">
+		<Name>Sans</Name>
+		<Size>16</Size>
+		<FontStyle>bold</FontStyle>
+	</CustomFont>
+
+	<CustomFont name="buttonFont2">
+		<Name>Sans</Name>
+		<Size>14</Size>
+		<FontStyle>bold</FontStyle>
+	</CustomFont>
+
+	<CustomFont name="TopBarFont">
+		<Name>Sans</Name>
+		<Size>36</Size>
+		<FontStyle>bold</FontStyle>
+	</CustomFont>
+
+	<CustomFont name="SidePanelFont">
+		<Name>Sans</Name>
+		<Size>18</Size>
+		<FontStyle>bold</FontStyle>
+	</CustomFont>
+
+	<CustomFont name="SmokeEvacFont">
+		<Name>Sans</Name>
+		<Size>26</Size>
+	</CustomFont>
+
+	<CustomFont name="SuctionTitleFont">
+		<Name>Sans</Name>
+		<Size>28</Size>
+	</CustomFont>
+
+	<CustomFont name="SuctionLimitFont">
+		<Name>Sans</Name>
+		<Size>72</Size>
+		<FontStyle>bold</FontStyle>
+	</CustomFont>
+
+	<CustomFont name="SuctionLevelFont">
+		<Name>Sans</Name>
+		<Size>34</Size>
+	</CustomFont>
+
+	<CustomFont name="SuctionUnitFont">
+		<Name>Sans</Name>
+		<Size>20</Size>
+	</CustomFont>
+
+</FontPack>
