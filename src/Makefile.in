@@ -97,7 +97,7 @@ am_ilixi_mgui_OBJECTS = ilixi_mgui-main.$(OBJEXT) \
 	ilixi_mgui-MGuiApplication.$(OBJEXT) \
 	ilixi_mgui-SDCardIcon.$(OBJEXT) ilixi_mgui-SimIcon.$(OBJEXT) \
 	ilixi_mgui-SimpleIcon.$(OBJEXT) ilixi_mgui-StatusBar.$(OBJEXT) \
-	ilixi_mgui-WiFiIcon.$(OBJEXT)
+	ilixi_mgui-UBusThread.$(OBJEXT) ilixi_mgui-WiFiIcon.$(OBJEXT)
 ilixi_mgui_OBJECTS = $(am_ilixi_mgui_OBJECTS)
 am__DEPENDENCIES_1 =
 ilixi_mgui_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -294,6 +294,8 @@ ilixi_mgui_SOURCES = main.cpp \
 			SimpleIcon.h \
 			StatusBar.cpp \
 			StatusBar.h \
+			UBusThread.cpp \
+			UBusThread.h \
 			WiFiIcon.cpp \
 			WiFiIcon.h
 
@@ -396,6 +398,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-SimIcon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-SimpleIcon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-StatusBar.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-UBusThread.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-WiFiIcon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ilixi_mgui-main.Po@am__quote@
 
@@ -566,6 +569,20 @@ ilixi_mgui-StatusBar.obj: StatusBar.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='StatusBar.cpp' object='ilixi_mgui-StatusBar.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-StatusBar.obj `if test -f 'StatusBar.cpp'; then $(CYGPATH_W) 'StatusBar.cpp'; else $(CYGPATH_W) '$(srcdir)/StatusBar.cpp'; fi`
+
+ilixi_mgui-UBusThread.o: UBusThread.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-UBusThread.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-UBusThread.Tpo -c -o ilixi_mgui-UBusThread.o `test -f 'UBusThread.cpp' || echo '$(srcdir)/'`UBusThread.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-UBusThread.Tpo $(DEPDIR)/ilixi_mgui-UBusThread.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='UBusThread.cpp' object='ilixi_mgui-UBusThread.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-UBusThread.o `test -f 'UBusThread.cpp' || echo '$(srcdir)/'`UBusThread.cpp
+
+ilixi_mgui-UBusThread.obj: UBusThread.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-UBusThread.obj -MD -MP -MF $(DEPDIR)/ilixi_mgui-UBusThread.Tpo -c -o ilixi_mgui-UBusThread.obj `if test -f 'UBusThread.cpp'; then $(CYGPATH_W) 'UBusThread.cpp'; else $(CYGPATH_W) '$(srcdir)/UBusThread.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/ilixi_mgui-UBusThread.Tpo $(DEPDIR)/ilixi_mgui-UBusThread.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='UBusThread.cpp' object='ilixi_mgui-UBusThread.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ilixi_mgui-UBusThread.obj `if test -f 'UBusThread.cpp'; then $(CYGPATH_W) 'UBusThread.cpp'; else $(CYGPATH_W) '$(srcdir)/UBusThread.cpp'; fi`
 
 ilixi_mgui-WiFiIcon.o: WiFiIcon.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(ilixi_mgui_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ilixi_mgui-WiFiIcon.o -MD -MP -MF $(DEPDIR)/ilixi_mgui-WiFiIcon.Tpo -c -o ilixi_mgui-WiFiIcon.o `test -f 'WiFiIcon.cpp' || echo '$(srcdir)/'`WiFiIcon.cpp

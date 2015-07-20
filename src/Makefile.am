@@ -25,6 +25,8 @@ ilixi_mgui_SOURCES	= main.cpp \
 			SimpleIcon.h \
 			StatusBar.cpp \
 			StatusBar.h \
+			UBusThread.cpp \
+			UBusThread.h \
 			WiFiIcon.cpp \
 			WiFiIcon.h
 
