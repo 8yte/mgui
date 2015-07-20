@@ -1,4 +1,5 @@
 #include "SimpleIcon.h"
+#include <core/Engine.h>
 #include <graphics/IconPack.h>
 #include <graphics/Painter.h>
 
@@ -33,6 +34,7 @@ SimpleIcon::setImage(const std::string& name)
     if (_image)
         delete _image;
     _image = __iconPack->getIcon(name);
+    ilixi::Engine::instance().wakeUp();
     update();
 }
 
