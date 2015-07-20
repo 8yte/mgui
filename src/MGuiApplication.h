@@ -4,6 +4,7 @@
 #include <core/Application.h>
 #include "StatusBar.h"
 #include "BottomBar.h"
+#include "UBusThread.h"
 
 namespace ilixi
 {
@@ -26,6 +27,8 @@ private:
     StatusBar* _statusBar;
     BottomBar* _bottomBar;
 
+    UBusThread* _thread;
+
     ilixi::PushButton* _resetButton;
     ilixi::PushButton* _fotaButton;
     ilixi::PushButton* _assertButton;
@@ -33,6 +36,7 @@ private:
 
     ilixi::ToolButton* _cellular;
     ilixi::ToolButton* _wireless;
+
 };
 
 } /* namespace MGUI */
