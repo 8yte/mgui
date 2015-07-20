@@ -57,6 +57,48 @@ StatusBar::compose(const ilixi::PaintEvent& event)
 }
 
 void
+StatusBar::setBatteryState(BatteryState state)
+{
+    _batteryIcon->setBatteryState(state);
+}
+
+void
+StatusBar::setBluetoothState(BluetoothState state)
+{
+    _bluetoothIcon->setBluetoothState(state);
+}
+
+void
+StatusBar::setCellularState(CellularState state)
+{
+    _cellularIcon->setCellularState(state);
+}
+
+void
+StatusBar::setGPSState(GpsState state)
+{
+    _gpsIcon->setGpsState(state);
+}
+
+void
+StatusBar::setSDCardState(SDCardState state)
+{
+    _sdcardIcon->setSdcardState(state);
+}
+
+void
+StatusBar::setSimState(SimState state)
+{
+    _simIcon->setSimState(state);
+}
+
+void
+StatusBar::setWifiState(WifiState state)
+{
+    _wifiIcon->setWifiState(state);
+}
+
+void
 StatusBar::updateTime()
 {
     struct timeval tv;

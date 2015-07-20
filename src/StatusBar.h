@@ -25,10 +25,25 @@ public:
     ~StatusBar();
 
     void
-    setBatteryState();
+    setBatteryState(BatteryState state);
 
     void
-    setBluetoothState();
+    setBluetoothState(BluetoothState state);
+
+    void
+    setCellularState(CellularState state);
+
+    void
+    setGPSState(GpsState state);
+
+    void
+    setSDCardState(SDCardState state);
+
+    void
+    setSimState(SimState state);
+
+    void
+    setWifiState(WifiState state);
 
 protected:
     virtual void
@@ -53,6 +68,4 @@ private:
 } /* namespace MGUI */
 
 #endif /* STATUSBAR_H_ */
-
-
 
