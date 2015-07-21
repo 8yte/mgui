@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Configuration PUBLIC "-//ilixi//DTD Configuration v2//EN" "http://www.ilixi.org/dtd/configuration.dtd">
+<!DOCTYPE Configuration PUBLIC "-//ilixi//DTD Configuration v1//EN" "http://www.ilixi.org/dtd/configuration.dtd">
 
 <Configuration>
 	<HardwareLayers>
-		<DFBLayer id="0" fsu="on" flipMode="none" bufferMode="backVideo" />
+		<DFBLayer id="0" fsu="off" flipMode="new" bufferMode="backVideo" />
 	</HardwareLayers>
 
 	<LogicLayers>
@@ -26,18 +26,22 @@
 		<BufferMode>double</BufferMode>
 	</Window>
 
-	<Theme directory="@ILX_THEMEDIR:">
-		<Background>bg.dfiff</Background>
-		<Style>style.xml</Style>
-		<Palette>palette.xml</Palette>
-		<FontPack>fonts_en_US.xml</FontPack>
-		<IconPack>IconPack.xml</IconPack>
+	<Theme>
+		<Background>@THEMEDIR:dark/bg.dfiff</Background>
+		<FontPack>@THEMEDIR:dark/fonts_en_US.xml</FontPack>
+		<IconPack>@THEMEDIR:dark/icons.xml</IconPack>
+		<Style>@THEMEDIR:dark/style.xml</Style>
+		<Palette>@THEMEDIR:dark/palette.xml</Palette>
 	</Theme>
 
-	<Sounds directory="@ILX_SOUNDDIR:" level="100">
+	<Sounds level="100">
+		<Sound id="Click">@SOUNDDIR:click.wav</Sound>
+		<Sound id="Close">@SOUNDDIR:close.wav</Sound>
+		<Sound id="Error">@SOUNDDIR:error.wav</Sound>
+		<Sound id="Notification">@SOUNDDIR:notification.wav</Sound>
 	</Sounds>
 
-	<Cursor visible="no" useLayer="yes">@IMGDIR:pointer.png</Cursor>
-
-	<PixelFormat>ARGB</PixelFormat>
+	<Cursor visible="yes" useLayer="yes">@IMGDIR:pointer.png</Cursor>
+	
+	<PixelFormat>DEFAULT</PixelFormat>
 </Configuration>

@@ -13,8 +13,10 @@ SimpleIcon::SimpleIcon(Widget* parent)
           _image(NULL)
 {
     setConstraints(ilixi::FixedConstraint, ilixi::FixedConstraint);
-    if (!__iconPack)
-        __iconPack = new ilixi::IconPack(DATADIR"/theme/IconPack.xml");
+    if (!__iconPack) {
+        __iconPack = new ilixi::IconPack();
+        __iconPack->parseIcons(DATADIR"/themes/mgui/IconPack.xml");
+    }
 }
 
 SimpleIcon::~SimpleIcon()

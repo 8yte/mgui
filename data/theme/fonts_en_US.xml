@@ -23,9 +23,9 @@
 		<FontStyle>bold</FontStyle>
 	</TitleFont>
 
-	<MicroFont>
+	<InfoFont>
 		<Name>Sans</Name>
 		<Size>12</Size>
-	</MicroFont>
+	</InfoFont>
 
 </FontPack>

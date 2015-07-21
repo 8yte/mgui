@@ -13,12 +13,13 @@ AC_HEADER_STDC
 
 PKG_CHECK_MODULES([ILIXI], [ilixi >= 1.0.0])
 
-MGUI_DATADIR=$datadir/$PACKAGE-$VERSION
+MGUI_DATADIR=$datadir/ilixi-1.0.0
 AC_SUBST(MGUI_DATADIR)
 
 AC_CONFIG_FILES([
 	Makefile \
 	data/Makefile \
+	data/images/Makefile \
 	data/theme/Makefile \
 	src/Makefile
 ])

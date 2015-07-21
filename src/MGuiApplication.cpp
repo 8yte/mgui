@@ -8,6 +8,7 @@ namespace MGUI
 MGuiApplication::MGuiApplication(int argc, char* argv[])
         : Application(&argc, &argv)
 {
+    setBackgroundImage(DATADIR"/themes/mgui/bg.dfiff");
     _statusBar = new StatusBar();
     _statusBar->setGeometry(5, 0, 470, 24);
     addWidget(_statusBar);

@@ -4600,10 +4600,10 @@ $as_echo "yes" >&6; }
 
 fi
 
-MGUI_DATADIR=$datadir/$PACKAGE-$VERSION
+MGUI_DATADIR=$datadir/ilixi-1.0.0
 
 
-ac_config_files="$ac_config_files Makefile data/Makefile data/theme/Makefile src/Makefile"
+ac_config_files="$ac_config_files Makefile data/Makefile data/images/Makefile data/theme/Makefile src/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -5340,6 +5340,7 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
+    "data/images/Makefile") CONFIG_FILES="$CONFIG_FILES data/images/Makefile" ;;
     "data/theme/Makefile") CONFIG_FILES="$CONFIG_FILES data/theme/Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
 

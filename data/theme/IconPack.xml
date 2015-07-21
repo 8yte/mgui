@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE IconPack PUBLIC "-//ilixi//DTD Icons v1//EN" "http://www.ilixi.org/dtd/icon_pack.dtd">
-<IconPack resource="@ILX_THEMEDIR:iconpack.dfiff" defaultSize="24">
+<IconPack resource="@IMGDIR:iconpack.dfiff" defaultSize="24">
 	<Icon row="1" col="1"  name="battery_100" />
 	<Icon row="1" col="2"  name="battery_90" />
 	<Icon row="1" col="3"  name="battery_80" />

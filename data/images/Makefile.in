@@ -76,7 +76,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-subdir = data/theme
+subdir = data/images
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -233,14 +233,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-miscdatadir = $(MGUI_DATADIR)/themes/mgui
-miscdata_DATA = bg.dfiff \
-				fonts_en_US.xml \
-				IconPack.xml \
-				palette.xml \
-				style.xml \
-				ui-pack.dfiff
-
+miscdatadir = $(MGUI_DATADIR)/images
+miscdata_DATA = iconpack.dfiff
 EXTRA_DIST = $(miscdata_DATA)
 all: all-am
 
@@ -254,9 +248,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign data/theme/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign data/images/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign data/theme/Makefile
+	  $(AUTOMAKE) --foreign data/images/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
