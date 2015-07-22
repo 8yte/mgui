@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 2.6)
 
 PROJECT(MGUI)
 
-ADD_DEFINITIONS(-Os -ggdb -Wall -Werror -Wmissing-declarations -DMARVELL_EXTENDED)
+ADD_DEFINITIONS(-Os -std=c++11 -ggdb -Wall -Werror -Wmissing-declarations -DMARVELL_EXTENDED)
 
 # define resource files target install
 SET(MGUI_DATADIR ${CMAKE_INSTALL_PREFIX}/share/ilixi-1.0.0)

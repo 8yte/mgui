@@ -4,35 +4,35 @@
 namespace MGUI
 {
 
-D_DEBUG_DOMAIN(MGUI_UBUS, "Mgui/Ubus", "Ubus Thread");
+D_DEBUG_DOMAIN(UBUS_THREAD, "Ubus Thread", "Thread");
 
 UBusThread::UBusThread(StatusBar* bar)
         : Thread(),
           _bar(bar)
 {
-    ILOG_TRACE(MGUI_UBUS);
+    ILOG_TRACE(UBUS_THREAD);
     uloop_init();
 
     _ubus = ubus_connect(NULL);
     if (!_ubus)
-        ILOG_THROW(MGUI_UBUS, "Failed to connect to ubus\n");
+        ILOG_THROW(UBUS_THREAD, "Failed to connect to ubus\n");
 
     ubus_add_uloop(_ubus);
-    ILOG_DEBUG(MGUI_UBUS, "%s exit\n", __func__);
+    ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
 
 UBusThread::~UBusThread()
 {
-    ILOG_TRACE(MGUI_UBUS);
+    ILOG_TRACE(UBUS_THREAD);
     ubus_free(_ubus);
     uloop_done();
-    ILOG_DEBUG(MGUI_UBUS, "%s exit\n", __func__);
+    ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
 
 int
 UBusThread::run()
 {
-    ILOG_TRACE(MGUI_UBUS);
+    ILOG_TRACE(UBUS_THREAD);
     uloop_run();
     return 1;
 #if 0
