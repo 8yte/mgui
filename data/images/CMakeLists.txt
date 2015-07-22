@@ -1,0 +1,1 @@
+INSTALL(FILES iconpack.dfiff DESTINATION @MGUI_DATADIR@/images)
