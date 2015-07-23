@@ -49,6 +49,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+@HAVE_UBUS_TRUE@am__append_1 = -DHAVE_UBUS
 bin_PROGRAMS = mgui$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
@@ -214,7 +215,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I build ${ACLOCAL_FLAGS}
-AM_CFLAGS = -DDATADIR=\"$(MGUI_DATADIR)\"
+AM_CFLAGS = -DDATADIR=\"$(MGUI_DATADIR)\" $(am__append_1)
 mgui_SOURCES = main.cpp \
 		MGuiPlatform.h \
 		BatteryIcon.cpp \

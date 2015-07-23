@@ -11,6 +11,7 @@ UBusThread::UBusThread(StatusBar* bar)
           _bar(bar)
 {
     ILOG_TRACE(UBUS_THREAD);
+#ifdef HAVE_UBUS
     uloop_init();
 
     _ubus = ubus_connect(NULL);
@@ -18,14 +19,17 @@ UBusThread::UBusThread(StatusBar* bar)
         ILOG_THROW(UBUS_THREAD, "Failed to connect to ubus\n");
 
     ubus_add_uloop(_ubus);
+#endif /* HAVE_UBUS */
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
 
 UBusThread::~UBusThread()
 {
     ILOG_TRACE(UBUS_THREAD);
+#ifdef HAVE_UBUS
     ubus_free(_ubus);
     uloop_done();
+#endif /* HAVE_UBUS */
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
 
@@ -33,12 +37,10 @@ int
 UBusThread::run()
 {
     ILOG_TRACE(UBUS_THREAD);
+#ifdef HAVE_UBUS
     uloop_run();
     return 1;
-#if 0
-    // init ubus context
-    // uloop_run()...
-    // not sure how to join or test for cancel thread here?
+#else
     int i = 0;
     while (true)
     {
@@ -51,7 +53,7 @@ UBusThread::run()
         sleep(1);
     }
     return 1;
-#endif
+#endif /* HAVE_UBUS */
 }
 
 } /* namespace MGUI */

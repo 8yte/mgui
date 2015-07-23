@@ -1,6 +1,9 @@
 ## Makefile.am for ./src
 ACLOCAL_AMFLAGS = -I build ${ACLOCAL_FLAGS}
 AM_CFLAGS 	=-DDATADIR=\"$(MGUI_DATADIR)\"
+if HAVE_UBUS
+AM_CFLAGS 	+=-DHAVE_UBUS
+endif
 bin_PROGRAMS	= mgui
 
 mgui_SOURCES	= main.cpp \

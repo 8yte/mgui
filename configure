@@ -576,6 +576,8 @@ ILIXI_CFLAGS
 PKG_CONFIG_LIBDIR
 PKG_CONFIG_PATH
 PKG_CONFIG
+HAVE_UBUS_FALSE
+HAVE_UBUS_TRUE
 EGREP
 GREP
 CPP
@@ -672,6 +674,7 @@ ac_user_opts='
 enable_option_checking
 enable_silent_rules
 enable_dependency_tracking
+enable_ubus
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1310,6 +1313,7 @@ Optional Features:
   --disable-silent-rules         verbose build output (undo: `make V=0')
   --disable-dependency-tracking  speeds up one-time build
   --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-ubus           enable openwrt ubus support [default=no]
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -4255,7 +4259,9 @@ $as_echo "#define STDC_HEADERS 1" >>confdefs.h
 fi
 
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing uloop_init" >&5
+# Check whether --enable-ubus was given.
+if test "${enable_ubus+set}" = set; then :
+  enableval=$enable_ubus; { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing uloop_init" >&5
 $as_echo_n "checking for library containing uloop_init... " >&6; }
 if ${ac_cv_search_uloop_init+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -4313,7 +4319,7 @@ else
   as_fn_error $? "unable to find the uloop_init function" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing ubus_connect" >&5
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing ubus_connect" >&5
 $as_echo_n "checking for library containing ubus_connect... " >&6; }
 if ${ac_cv_search_ubus_connect+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -4371,7 +4377,7 @@ else
   as_fn_error $? "unable to find the ubus_connect function" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing uci_commit" >&5
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing uci_commit" >&5
 $as_echo_n "checking for library containing uci_commit... " >&6; }
 if ${ac_cv_search_uci_commit+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -4429,7 +4435,7 @@ else
   as_fn_error $? "unable to find the uci_commit function" "$LINENO" 5
 fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing blobmsg_add_object" >&5
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing blobmsg_add_object" >&5
 $as_echo_n "checking for library containing blobmsg_add_object... " >&6; }
 if ${ac_cv_search_blobmsg_add_object+:} false; then :
   $as_echo_n "(cached) " >&6
@@ -4486,6 +4492,20 @@ if test "$ac_res" != no; then :
 else
   as_fn_error $? "unable to find the blobmsg_get_u32 function" "$LINENO" 5
 fi
+
+
+else
+  enable_ubus=no
+fi
+
+ if test x$enable_ubus = xyes; then
+  HAVE_UBUS_TRUE=
+  HAVE_UBUS_FALSE='#'
+else
+  HAVE_UBUS_TRUE='#'
+  HAVE_UBUS_FALSE=
+fi
+
 
 
 
@@ -4833,6 +4853,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
   as_fn_error $? "conditional \"am__fastdepCC\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_UBUS_TRUE}" && test -z "${HAVE_UBUS_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_UBUS\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 

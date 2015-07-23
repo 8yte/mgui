@@ -11,10 +11,16 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_PROG_CXX
 AC_HEADER_STDC
 
-AC_SEARCH_LIBS([uloop_init], [ubox], [], [AC_MSG_ERROR([unable to find the uloop_init function])])
-AC_SEARCH_LIBS([ubus_connect], [ubus], [], [AC_MSG_ERROR([unable to find the ubus_connect function])])
-AC_SEARCH_LIBS([uci_commit], [uci], [], [AC_MSG_ERROR([unable to find the uci_commit function])])
-AC_SEARCH_LIBS([blobmsg_add_object], [blobmsg_json], [], [AC_MSG_ERROR([unable to find the blobmsg_get_u32 function])])
+AC_ARG_ENABLE([ubus],
+AS_HELP_STRING([--enable-ubus], [enable openwrt ubus support @<:@default=no@:>@]),
+[AC_SEARCH_LIBS([uloop_init], [ubox], [], [AC_MSG_ERROR([unable to find the uloop_init function])])
+ AC_SEARCH_LIBS([ubus_connect], [ubus], [], [AC_MSG_ERROR([unable to find the ubus_connect function])])
+ AC_SEARCH_LIBS([uci_commit], [uci], [], [AC_MSG_ERROR([unable to find the uci_commit function])])
+ AC_SEARCH_LIBS([blobmsg_add_object], [blobmsg_json], [], [AC_MSG_ERROR([unable to find the blobmsg_get_u32 function])])
+],
+[enable_ubus=no])
+AM_CONDITIONAL([HAVE_UBUS], [test x$enable_ubus = xyes])
+
 
 PKG_CHECK_MODULES([ILIXI], [ilixi >= 1.0.0])
 
