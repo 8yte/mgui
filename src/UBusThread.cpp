@@ -4,7 +4,7 @@
 namespace MGUI
 {
 
-D_DEBUG_DOMAIN(UBUS_THREAD, "Ubus Thread", "Thread");
+D_DEBUG_DOMAIN(UBUS_THREAD, "Ubus/Thread", "Thread");
 
 UBusThread::UBusThread(StatusBar* bar)
         : Thread(),

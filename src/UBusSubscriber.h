@@ -14,25 +14,32 @@ namespace MGUI
 class UBusSubscriber
 {
 public:
-    UBusSubscriber(ubus_context* ubus, ubus_handler_t cb);
+    UBusSubscriber(ubus_context* ubus);
 
     virtual
     ~UBusSubscriber();
 
-    int
+    virtual int
+    Register(ubus_handler_t cb, const char *name);
+
+    virtual int
+    UnRegister();
+
+    virtual int
     Subscribe(std::string &event);
 
-    int
+    virtual int
     UnSubscribe(std::string &event);
 
-    int
-    Subscribe(std::vector<std::string> events);
+    virtual int
+    Subscribe(std::vector<std::string> &events);
 
-    int
-    UnSubscribe(std::vector<std::string> events);
+    virtual int
+    UnSubscribe(std::vector<std::string> &events);
 
 private:
     ubus_subscriber _subscriber;
+    uint32_t _id;
     ubus_context* _ubus;
 };
 

@@ -27,6 +27,8 @@ SET(SOURCES
 	UBusThread.h
 	UBusSubscriber.cpp
 	UBusSubscriber.h
+	MGuiRil.cpp
+	MGuiRil.h
 	WiFiIcon.cpp
 	WiFiIcon.h
 )
