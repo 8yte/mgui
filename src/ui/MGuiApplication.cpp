@@ -40,15 +40,18 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
     _wireless = new ilixi::ToolButton("Wireless");
     _wireless->setGeometry(315, 138, 160, 80);
     addWidget(_wireless);
-
+#ifdef PXA1826
     _thread = new UBusThread(_statusBar);
     _thread->start();
+#endif
 }
 
 MGuiApplication::~MGuiApplication()
 {
+#ifdef PXA1826
     _thread->cancel();
     delete _thread;
+#endif
 }
 
 } /* namespace MGUI */

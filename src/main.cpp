@@ -1,4 +1,4 @@
-#include "MGuiApplication.h"
+#include "ui/MGuiApplication.h"
 
 int
 main(int argc, char* argv[])

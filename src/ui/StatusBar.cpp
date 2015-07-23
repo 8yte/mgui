@@ -28,6 +28,9 @@ StatusBar::StatusBar(ilixi::Widget* parent)
     _wifiIcon = new WiFiIcon();
     addWidget(_wifiIcon);
 
+    _cellularTechIcon = new CellularTechIcon();
+    addWidget(_cellularTechIcon);
+
     _cellularIcon = new CellularIcon();
     addWidget(_cellularIcon);
 
@@ -72,6 +75,12 @@ void
 StatusBar::setCellularState(CellularState state)
 {
     _cellularIcon->setCellularState(state);
+}
+
+void
+StatusBar::setCellularTechState(CellularTechState state)
+{
+    _cellularTechIcon->setCellularTechState(state);
 }
 
 void

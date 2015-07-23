@@ -32,3 +32,9 @@ src/*.o
 stamp-h1
 
 autom4te.cache/
+config.h.in
+config.h.in~
+configure
+src/Makefile.in
+Makefile.in
+

@@ -8,6 +8,7 @@
 #include "BatteryIcon.h"
 #include "BTIcon.h"
 #include "CellularIcon.h"
+#include "CellularTechIcon.h"
 #include "GPSIcon.h"
 #include "SDCardIcon.h"
 #include "SimIcon.h"
@@ -32,6 +33,9 @@ public:
 
     void
     setCellularState(CellularState state);
+
+    void
+    setCellularTechState(CellularTechState state);
 
     void
     setGPSState(GpsState state);
@@ -59,6 +63,7 @@ private:
     BatteryIcon* _batteryIcon;
     BTIcon* _bluetoothIcon;
     CellularIcon* _cellularIcon;
+    CellularTechIcon* _cellularTechIcon;
     GPSIcon* _gpsIcon;
     SDCardIcon* _sdcardIcon;
     SimIcon* _simIcon;

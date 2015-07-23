@@ -4,7 +4,9 @@
 #include <core/Application.h>
 #include "StatusBar.h"
 #include "BottomBar.h"
-#include "UBusThread.h"
+#ifdef PXA1826
+#include <platform/pxa1826/UBusThread.h>
+#endif
 
 namespace ilixi
 {
@@ -26,9 +28,9 @@ public:
 private:
     StatusBar* _statusBar;
     BottomBar* _bottomBar;
-
+#ifdef PXA1826
     UBusThread* _thread;
-
+#endif
     ilixi::PushButton* _resetButton;
     ilixi::PushButton* _fotaButton;
     ilixi::PushButton* _assertButton;

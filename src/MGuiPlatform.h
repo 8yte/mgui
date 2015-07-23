@@ -125,7 +125,11 @@ enum CellularState
     Cellular3,
     Cellular3NoData,
     Cellular4,
-    Cellular4NoData,
+    Cellular4NoData
+};
+
+enum CellularTechState
+{
     CellularTechUnknown,
     CellularTechHSDPAP,
     CellularTechHSDPA,
