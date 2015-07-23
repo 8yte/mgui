@@ -31,3 +31,4 @@ src/.deps/
 src/*.o
 stamp-h1
 
+autom4te.cache/
