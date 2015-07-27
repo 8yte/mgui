@@ -54,6 +54,10 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateChange));
 	_onkey->start();
 #endif
+
+	_timer = new ilixi::Timer();
+	_timer->sigExec.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateChange));
+	_timer->start(30000);
 }
 
 MGuiApplication::~MGuiApplication()
@@ -66,6 +70,17 @@ MGuiApplication::~MGuiApplication()
 	delete _ubus;
 	delete _onkey;
 #endif
+	Touch(false);
+	Screen(false);
+	delete _timer;
+	delete _wireless;
+	delete _cellular;
+	delete _keepAliveButton;
+	delete _assertButton;
+	delete _fotaButton;
+	delete _resetButton;
+	delete _bottomBar;
+	delete _statusBar;	
 }
 
 #ifdef PXA1826
@@ -126,11 +141,13 @@ MGuiApplication::MGuiStateChange()
 		Screen(false);
 		Touch(false);
 		_state = MGuiAppStateOff;
+		_timer->stop();
 	} else {
 		ILOG_DEBUG(MGUI_APP, "Waking up...\n");
 		Screen(true);
 		Touch(true);
 		_state = MGuiAppStateOn;
+		_timer->restart();
 	}
 
 	ILOG_DEBUG(MGUI_APP, "%s: Exit\n", __func__);

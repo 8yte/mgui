@@ -57,6 +57,7 @@ private:
     ilixi::ToolButton* _cellular;
     ilixi::ToolButton* _wireless;
 
+    ilixi::Timer* _timer;
 };
 
 } /* namespace MGUI */
