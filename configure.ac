@@ -18,6 +18,7 @@ if test "$with_platform" = "pxa1826"; then
 	AC_SEARCH_LIBS([uci_commit], [uci], [], [AC_MSG_ERROR([unable to find the uci_commit function])])
 	AC_SEARCH_LIBS([blobmsg_add_object], [blobmsg_json], [], [AC_MSG_ERROR([unable to find the blobmsg_get_u32 function])])
 	AC_SEARCH_LIBS([rilutil_makeRequestBlob], [rilutil], [], [AC_MSG_ERROR([unable to find the rilutil_makeRequestBlob function])])
+	AC_SEARCH_LIBS([property_get], [prop2uci], [], [AC_MSG_ERROR([unable to find the property_get function])])
 	AC_CHECK_HEADERS_ONCE(ril.h rilutil.h)
 fi
 

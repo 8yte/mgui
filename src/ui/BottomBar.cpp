@@ -10,10 +10,6 @@ BottomBar::BottomBar(ilixi::Widget* parent)
     ilixi::HBoxLayout* layout = new ilixi::HBoxLayout();
     layout->setVerticalAlignment(ilixi::Alignment::Middle);
     setLayout(layout);
-
-    _version = new ilixi::Label("version v0.1");
-    _version->setLayoutAlignment(ilixi::TextLayout::Center);
-    addWidget(_version);
 }
 
 BottomBar::~BottomBar()
@@ -23,6 +19,14 @@ BottomBar::~BottomBar()
 void
 BottomBar::compose(const ilixi::PaintEvent& event)
 {
+}
+
+void
+BottomBar::SetVersion(const std::string &version)
+{	
+    _version = new ilixi::Label(version);
+    _version->setLayoutAlignment(ilixi::TextLayout::Center);
+    addWidget(_version);
 }
 
 } /* namespace MGUI */

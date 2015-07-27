@@ -14,9 +14,10 @@ static void UBusThreadEvent(struct uloop_fd *u, unsigned int events)
     std::cout << "UBusThreadEvent: " << event <<std::endl;
 }
 
-UBusThread::UBusThread(StatusBar* bar, int fd)
+UBusThread::UBusThread(StatusBar* top, BottomBar* bottom, int fd)
         : Thread(),
-          _bar(bar)
+          _top(top),
+          _bottom(bottom)
 {
     ILOG_TRACE(UBUS_THREAD);
 
@@ -29,10 +30,11 @@ UBusThread::UBusThread(StatusBar* bar, int fd)
     _ubus_fd.cb = UBusThreadEvent;
     _ubus_fd.fd = fd;
 
-    MGuiRil::Create(_ubus, _bar);
-    MGuiCharger::Create(_ubus, _bar);
-    MGuiWifi::Create(_ubus, _bar);
-    MGuiStats::Create(_ubus, _bar);
+    MGuiRil::Create(_ubus, _top);
+    MGuiCharger::Create(_ubus, _top);
+    MGuiWifi::Create(_ubus, _top);
+    MGuiStats::Create(_ubus, _top);
+    MGuiHawk::Create(_ubus, _bottom);
 
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
@@ -48,6 +50,7 @@ UBusThread::~UBusThread()
     MGuiCharger::Destroy();
     MGuiWifi::Destroy();
     MGuiStats::Destroy();
+    MGuiHawk::Destroy();
 
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }

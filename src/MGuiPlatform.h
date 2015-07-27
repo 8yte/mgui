@@ -19,6 +19,7 @@ enum PlatformRequest
     HawkNoDataAssertReq,
     HawkFotaReq,
     HawkKeepAliveReq,
+    HawkForceUploadReq,
 };
 
 enum PlatformEvent

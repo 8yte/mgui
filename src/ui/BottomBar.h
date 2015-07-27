@@ -10,17 +10,20 @@ namespace MGUI
 class BottomBar : public ilixi::ContainerBase
 {
 public:
-    BottomBar(ilixi::Widget* parent = NULL);
+	BottomBar(ilixi::Widget* parent = NULL);
 
-    virtual
-    ~BottomBar();
+	virtual
+	~BottomBar();
 
+	void
+	SetVersion(const std::string &version);
+	
 protected:
-    virtual void
-    compose(const ilixi::PaintEvent& event);
+	virtual void
+	compose(const ilixi::PaintEvent& event);
 
 private:
-    ilixi::Label* _version;
+	ilixi::Label* _version;
 };
 
 } /* namespace MGUI */

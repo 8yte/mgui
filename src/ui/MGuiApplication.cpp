@@ -48,7 +48,7 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	/* init pipe */
 	if (pipe(_fd))
 		ILOG_THROW(MGUI_APP, "pipe failed with error\n");
-	_ubus = new UBusThread(_statusBar, _fd[0]);
+	_ubus = new UBusThread(_statusBar, _bottomBar, _fd[0]);
 	_ubus->start();
 	_onkey = new OnkeyThread(_fd[1]);
 	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateChange));
@@ -72,15 +72,6 @@ MGuiApplication::~MGuiApplication()
 #endif
 	Touch(false);
 	Screen(false);
-	delete _timer;
-	delete _wireless;
-	delete _cellular;
-	delete _keepAliveButton;
-	delete _assertButton;
-	delete _fotaButton;
-	delete _resetButton;
-	delete _bottomBar;
-	delete _statusBar;	
 }
 
 #ifdef PXA1826

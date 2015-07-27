@@ -45,6 +45,7 @@ enum {
 	_MAX
 };
 
+#undef blob_for_each_attr
 #define blob_for_each_attr(pos, attr, rem) \
 	for (rem = attr ? blob_len(attr) : 0, \
 	     pos = attr ? (blob_attr*)blob_data(attr) : 0; \
