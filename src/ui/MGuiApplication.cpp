@@ -51,6 +51,7 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	_ubus = new UBusThread(_statusBar, _fd[0]);
 	_ubus->start();
 	_onkey = new OnkeyThread(_fd[1]);
+	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateChange));
 	_onkey->start();
 #endif
 }
@@ -65,6 +66,74 @@ MGuiApplication::~MGuiApplication()
 	delete _ubus;
 	delete _onkey;
 #endif
+}
+
+#ifdef PXA1826
+#define TOUCH_RUNTIME_PM_PATH "/sys/bus/i2c/drivers/cyttsp-i2c/0-0024/power/control"
+#else
+#define TOUCH_RUNTIME_PM_PATH ""
+#endif
+
+void
+MGuiApplication::Touch(bool on)
+{
+	int ret = 0;
+	const char *mode[] = {"auto", "on"};
+
+	ILOG_TRACE(MGUI_APP);
+
+	int fd = open(TOUCH_RUNTIME_PM_PATH, O_RDWR);
+
+	if (fd < 0) {
+		ILOG_ERROR(MGUI_APP, "Can't open touchscreen runtime control (%s)\n", TOUCH_RUNTIME_PM_PATH);
+		return;
+	}
+
+	ret = write(fd, mode[!!on], strlen(mode[!!on]));
+	if (ret < 0) {
+		ILOG_ERROR(MGUI_APP, "%s runtime suspend failed\n", on ? "disable" : "enable");
+		goto out;
+	}
+
+	ILOG_DEBUG(MGUI_APP, "%s runtime suspend success\n", on ? "disable" : "enable");
+out:
+	close(fd);
+	ILOG_DEBUG(MGUI_APP, "%s: Exit\n", __func__);
+}
+
+void
+MGuiApplication::Screen(bool on)
+{
+	IDirectFB *dfb = ilixi::PlatformManager::instance().getDFB();
+	IDirectFBScreen *screen;
+
+	ILOG_TRACE(MGUI_APP);
+
+	dfb->GetScreen(dfb, DSCID_PRIMARY, &screen);
+	screen->SetPowerMode(screen, on ? DSPM_ON : DSPM_OFF);
+	screen->Release(screen);
+
+	ILOG_DEBUG(MGUI_APP, "%s: Exit\n", __func__);
+}
+
+void
+MGuiApplication::MGuiStateChange()
+{
+	ILOG_TRACE(MGUI_APP);
+
+	if (_state == MGuiAppStateOn) {
+		ILOG_DEBUG(MGUI_APP, "Going to sleep...\n");
+		Screen(false);
+		Touch(false);
+		_state = MGuiAppStateOff;
+	} else {
+		ILOG_DEBUG(MGUI_APP, "Waking up...\n");
+		Screen(true);
+		Touch(true);
+		_state = MGuiAppStateOn;
+	}
+
+	ILOG_DEBUG(MGUI_APP, "%s: Exit\n", __func__);
 }
 
 } /* namespace MGUI */

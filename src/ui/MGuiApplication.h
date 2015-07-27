@@ -2,6 +2,7 @@
 #define MGUIAPPLICATION_H_
 
 #include <core/Application.h>
+#include <core/PlatformManager.h>
 #include "StatusBar.h"
 #include "BottomBar.h"
 #ifdef PXA1826
@@ -26,9 +27,23 @@ public:
     virtual
     ~MGuiApplication();
 
+    void
+    MGuiStateChange();
+
 private:
+    void
+    Screen(bool on);
+
+    void
+    Touch(bool on);
+
+    enum MguiApplicationState {
+        MGuiAppStateOn,
+        MGuiAppStateOff
+    } _state;
     StatusBar* _statusBar;
     BottomBar* _bottomBar;
+
 #ifdef PXA1826
     int _fd[2];
     UBusThread* _ubus;

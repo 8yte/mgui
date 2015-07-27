@@ -58,6 +58,7 @@ OnkeyThread::run()
 			/* key released, dispatch event */
 			press = 0;
 			ILOG_ERROR(ONKEY_THREAD, "onkey pressed\n");
+			sigOnkeyPress();
 			write(_pipe, &_event, sizeof(_event));
 		}
 	} while (1);

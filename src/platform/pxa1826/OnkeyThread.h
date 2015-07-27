@@ -21,6 +21,11 @@ public:
     virtual int
     run();
 
+    /*!
+     * This signal is emitted when onkey is pressed and released
+     */
+    sigc::signal<void> sigOnkeyPress;
+    
 private:
     PlatformEvent _event;
     const char* _dev;
