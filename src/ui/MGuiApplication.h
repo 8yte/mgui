@@ -30,6 +30,7 @@ private:
     StatusBar* _statusBar;
     BottomBar* _bottomBar;
 #ifdef PXA1826
+    int _fd[2];
     UBusThread* _ubus;
     OnkeyThread* _onkey;
 #endif

@@ -1,9 +1,12 @@
 #include "MGuiApplication.h"
 #include <ui/PushButton.h>
 #include <ui/ToolButton.h>
+#include <core/Logger.h>
 
 namespace MGUI
 {
+
+D_DEBUG_DOMAIN(MGUI_APP, "Mgui/Application", "Mgui App");
 
 MGuiApplication::MGuiApplication(int argc, char* argv[])
 	: Application(&argc, &argv)
@@ -42,9 +45,12 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	addWidget(_wireless);
 
 #ifdef PXA1826
-	_ubus = new UBusThread(_statusBar);
+	/* init pipe */
+	if (pipe(_fd))
+		ILOG_THROW(MGUI_APP, "pipe failed with error\n");
+	_ubus = new UBusThread(_statusBar, _fd[0]);
 	_ubus->start();
-	_onkey = new OnkeyThread(NULL);
+	_onkey = new OnkeyThread(_fd[1]);
 	_onkey->start();
 #endif
 }
@@ -54,6 +60,8 @@ MGuiApplication::~MGuiApplication()
 #ifdef PXA1826
 	_onkey->cancel();
 	_ubus->cancel();
+	close(_fd[0]);
+	close(_fd[1]);
 	delete _ubus;
 	delete _onkey;
 #endif

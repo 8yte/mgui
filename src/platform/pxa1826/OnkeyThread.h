@@ -13,7 +13,7 @@ namespace MGUI
 class OnkeyThread : public ilixi::Thread
 {
 public:
-    OnkeyThread(ubus_context *ubus);
+    OnkeyThread(int pipe_fd);
 
     virtual
     ~OnkeyThread();
@@ -22,7 +22,9 @@ public:
     run();
 
 private:
-    ubus_context* _ubus;
+    PlatformEvent _event;
+    const char* _dev;
+    int _pipe;
 };
 
 } /* namespace MGUI */
