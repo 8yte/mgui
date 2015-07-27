@@ -90,7 +90,7 @@ private:
 	parse_blobmsg(blob_attr *attr, blob_attr **tb);
 
 	int
-	charger_parseattrs_tag(blob_attr *msg);
+	parseattrs_tag(blob_attr *msg);
 
 	void
 	dump_chg_bat_tag();

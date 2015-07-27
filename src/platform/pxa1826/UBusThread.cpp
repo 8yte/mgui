@@ -31,6 +31,7 @@ UBusThread::UBusThread(StatusBar* bar, int fd)
 
     MGuiRil::Create(_ubus, _bar);
     MGuiCharger::Create(_ubus, _bar);
+    MGuiWifi::Create(_ubus, _bar);
 
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
@@ -44,6 +45,7 @@ UBusThread::~UBusThread()
 
     MGuiRil::Destroy();
     MGuiCharger::Destroy();
+    MGuiWifi::Destroy();
 
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }

@@ -64,7 +64,7 @@ int MGuiCharger:: parse_blobmsg(struct blob_attr *attr, struct blob_attr **tb)
 	return 0;
 }
 
-int MGuiCharger::charger_parseattrs_tag(blob_attr *msg)
+int MGuiCharger::parseattrs_tag(blob_attr *msg)
 {
 	int ret;
 
@@ -128,7 +128,7 @@ void MGuiCharger::dump_chg_bat_tag()
 
 int MGuiCharger::Update(blob_attr *msg)
 {
-	int ret = charger_parseattrs_tag(msg);
+	int ret = parseattrs_tag(msg);
 	if (ret){
 		ILOG_ERROR(MGUI_CHARGER, "parsing blobmsg failed %d\n", ret);
 		return ret;

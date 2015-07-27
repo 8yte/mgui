@@ -47,7 +47,11 @@ mgui_SOURCES += platform/pxa1826/UBusThread.cpp \
 		platform/pxa1826/ChargerRequest.cpp \
 		platform/pxa1826/ChargerRequest.h \
 		platform/pxa1826/MGuiCharger.cpp \
-		platform/pxa1826/MGuiCharger.h
+		platform/pxa1826/MGuiCharger.h \
+		platform/pxa1826/WifiRequest.cpp \
+		platform/pxa1826/WifiRequest.h \
+		platform/pxa1826/MGuiWifi.cpp \
+		platform/pxa1826/MGuiWifi.h
 endif
 
 mgui_CPPFLAGS	= $(AM_CFLAGS) $(ILIXI_CFLAGS)

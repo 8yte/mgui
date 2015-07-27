@@ -11,6 +11,7 @@ extern "C" {
 #include "rilutil.h"
 #include "MGuiRil.h"
 #include "MGuiCharger.h"
+#include "MGuiWifi.h"
 
 namespace MGUI
 {
