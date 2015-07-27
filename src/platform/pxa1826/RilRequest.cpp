@@ -365,6 +365,12 @@ int RilRegistration::Callback(ubus_request *req, blob_attr *msg)
 	ret = rilutil_parseResponse(msg, &requestid, &rilerrno, &data, &datalen);
 	rilutilstrings *resp = (rilutilstrings *)data;
 
+	if (ret || rilerrno || !data) {
+		ILOG_ERROR(MGUI_SIMCARD, "RIL ERROR: ret=%d, requestid=%d, rilerrno=%d, data=%p\n",
+			  ret, requestid, rilerrno, data);
+		return ret;
+	}
+
 	if (resp->num < 2) {
 		ILOG_ERROR(MGUI_REGISTRATION, "wrong resp->num=%d\n", resp->num);
 		return -1;
