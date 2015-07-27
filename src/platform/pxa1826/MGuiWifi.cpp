@@ -187,6 +187,12 @@ int MGuiWifi::Register()
 		return ret;
 	}
 
+	ret = UBusClient::Subscribe();
+	if (ret) {
+		ILOG_ERROR(MGUI_WIFI, "Subscribe events failed %d\n", ret);
+		goto unregister;
+	}
+
 	_request = new WifiRequest(_subscriber, _id, _ubus);
 	_request->Request();
 

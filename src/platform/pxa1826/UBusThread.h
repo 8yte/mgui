@@ -12,6 +12,7 @@ extern "C" {
 #include "MGuiRil.h"
 #include "MGuiCharger.h"
 #include "MGuiWifi.h"
+#include "MGuiStats.h"
 
 namespace MGUI
 {

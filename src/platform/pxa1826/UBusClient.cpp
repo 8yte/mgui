@@ -57,6 +57,45 @@ UBusClient::UnRegister()
     return 0;
 }
 
+
+int
+UBusClient::Subscribe()
+{
+    int ret;
+
+    ILOG_TRACE(UBUS_CLIENT);
+
+    ret = ubus_subscribe(_ubus, &_subscriber, _id);
+    if (ret) {
+        ILOG_ERROR(UBUS_CLIENT,"subscribe failed (err: %s)\n",
+                   ubus_strerror(ret));
+        return ret;
+    }
+
+    ILOG_DEBUG(UBUS_CLIENT, "subscribe success\n");
+
+    return 0;
+}
+
+int
+UBusClient::UnSubscribe()
+{
+    int ret;
+
+    ILOG_TRACE(UBUS_CLIENT);
+
+    ret = ubus_unsubscribe(_ubus, &_subscriber, _id);
+    if (ret) {
+        ILOG_ERROR(UBUS_CLIENT,"unsubscribe failed (err: %s)\n",
+                   ubus_strerror(ret));
+        return ret;
+    }
+
+    ILOG_DEBUG(UBUS_CLIENT, "unsubscribe success\n");
+
+    return 0;
+}
+
 int
 UBusClient::Subscribe(const std::string &event)
 {

@@ -30,6 +30,12 @@ protected:
     Register(ubus_handler_t cb, const char *name);
 
     virtual int
+    Subscribe();
+
+    virtual int
+    UnSubscribe();
+
+    virtual int
     Subscribe(const std::string &event);
 
     virtual int
