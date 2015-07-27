@@ -2,6 +2,14 @@
 #define SDCARDICON_H_
 
 #include "SimpleIcon.h"
+#ifdef PXA1826
+extern "C" {
+#include <libgen.h>
+#include <dirent.h>
+#include <uci.h>
+#include <uci_blob.h>
+}
+#endif
 
 namespace MGUI
 {
@@ -21,6 +29,9 @@ public:
     setSdcardState(SDCardState sdcardState);
 
 private:
+    int
+    UciDetectSdcard(char *cfg);
+
     SDCardState _sdcardState;
 };
 
