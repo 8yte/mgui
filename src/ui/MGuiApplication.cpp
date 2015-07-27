@@ -21,20 +21,24 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	addWidget(_bottomBar);
 
 	_resetButton = new ilixi::PushButton("Reset");
-	_resetButton->setGeometry(5, 48, 160, 40);
+	_resetButton->setGeometry(5, 30, 160, 38);
 	addWidget(_resetButton);
 
 	_fotaButton = new ilixi::PushButton("Fota");
-	_fotaButton->setGeometry(5, 93, 160, 40);
+	_fotaButton->setGeometry(5, 73, 160, 38);
 	addWidget(_fotaButton);
 
 	_assertButton = new ilixi::PushButton("No data assert");
-	_assertButton->setGeometry(5, 138, 160, 40);
+	_assertButton->setGeometry(5, 116, 160, 38);
 	addWidget(_assertButton);
 
 	_keepAliveButton = new ilixi::PushButton("Keep alive");
-	_keepAliveButton->setGeometry(5, 183, 160, 40);
+	_keepAliveButton->setGeometry(5, 159, 160, 38);
 	addWidget(_keepAliveButton);
+
+	_forceUploadeButton = new ilixi::PushButton("force upload");
+	_forceUploadeButton->setGeometry(5, 202, 160, 38);
+	addWidget(_forceUploadeButton);
 
 	_cellular = new ilixi::ToolButton("Cellular");
 	_cellular->setGeometry(315, 48, 160, 80);
@@ -64,6 +68,7 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	_fotaButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Fota));
 	_assertButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Assert));
 	_keepAliveButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::KeepAlive));
+	_forceUploadeButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::ForceUpload));
 #endif
 
 	_timer = new ilixi::Timer();

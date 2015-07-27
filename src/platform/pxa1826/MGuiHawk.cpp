@@ -133,6 +133,12 @@ void MGuiHawk::KeepAlive()
 		_request->Request(HawkKeepAliveReq);
 }
 
+void MGuiHawk::ForceUpload()
+{
+	if (_instance)
+		_request->Request(HawkForceUploadReq);
+}
+
 int MGuiHawk::Register()
 {
 	int ret;

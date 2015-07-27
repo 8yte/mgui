@@ -45,6 +45,9 @@ public:
 	void
 	KeepAlive();
 
+	void
+	ForceUpload();
+
 protected:
 	MGuiHawk(ubus_context* ubus, BottomBar *bar);
 

@@ -60,6 +60,7 @@ private:
     ilixi::PushButton* _fotaButton;
     ilixi::PushButton* _assertButton;
     ilixi::PushButton* _keepAliveButton;
+    ilixi::PushButton* _forceUploadeButton;
 
     ilixi::ToolButton* _cellular;
     ilixi::ToolButton* _wireless;

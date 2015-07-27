@@ -5,7 +5,7 @@
 namespace MGUI
 {
 
-D_DEBUG_DOMAIN(MGUI_WIFIREQ, "Mgui/WifiRequest", "WifiRequest");
+D_DEBUG_DOMAIN(MGUI_HAWQREQ, "Mgui/WifiRequest", "WifiRequest");
 
 /***************************************************************************/
 /**		RilRequest Class Implementation
@@ -29,14 +29,15 @@ const char *HawkRequest::req_to_str(const enum PlatformRequest &req)
 	case HawkFotaReq:
 		return "fota";
 	case HawkNoDataAssertReq:
-		return "no_data_assert";
+		return "ping";
 	case HawkForceUploadReq:
-		return "force_upload";
+		return "upload_logs";
 	}
 }
 
 int HawkRequest::Request(const enum PlatformRequest &req)
 {
+	ILOG_INFO(MGUI_HAWQREQ, "Trigger Hawk %s\n", req_to_str(req));
 	return InvokeAsync(req_to_str(req), NULL);
 }
 
