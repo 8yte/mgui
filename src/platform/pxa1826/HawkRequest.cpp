@@ -19,7 +19,7 @@ HawkRequest::~HawkRequest()
 {
 }
 
-const char *HawkRequest::req_to_str(enum PlatformRequest &req)
+const char *HawkRequest::req_to_str(const enum PlatformRequest &req)
 {
 	switch (req) {
 	case HawkKeepAliveReq:
@@ -35,7 +35,7 @@ const char *HawkRequest::req_to_str(enum PlatformRequest &req)
 	}
 }
 
-int HawkRequest::Request(enum PlatformRequest &req)
+int HawkRequest::Request(const enum PlatformRequest &req)
 {
 	return InvokeAsync(req_to_str(req), NULL);
 }

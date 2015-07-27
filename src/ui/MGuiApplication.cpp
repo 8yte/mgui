@@ -48,11 +48,22 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	/* init pipe */
 	if (pipe(_fd))
 		ILOG_THROW(MGUI_APP, "pipe failed with error\n");
-	_ubus = new UBusThread(_statusBar, _bottomBar, _fd[0]);
+	_ubus = new UBusThread(_fd[0]);
 	_ubus->start();
 	_onkey = new OnkeyThread(_fd[1]);
 	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateChange));
 	_onkey->start();
+	
+	MGuiRil::Create(_ubus->GetContext(), _statusBar);
+	MGuiCharger::Create(_ubus->GetContext(), _statusBar);
+	MGuiWifi::Create(_ubus->GetContext(), _statusBar);
+	MGuiStats::Create(_ubus->GetContext(), _statusBar);
+	MGuiHawk::Create(_ubus->GetContext(), _bottomBar);
+
+	_resetButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Reset));
+	_fotaButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Fota));
+	_assertButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Assert));
+	_keepAliveButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::KeepAlive));
 #endif
 
 	_timer = new ilixi::Timer();
@@ -63,6 +74,11 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 MGuiApplication::~MGuiApplication()
 {
 #ifdef PXA1826
+	MGuiRil::Destroy();
+	MGuiCharger::Destroy();
+	MGuiWifi::Destroy();
+	MGuiStats::Destroy();
+	MGuiHawk::Destroy();
 	_onkey->cancel();
 	_ubus->cancel();
 	close(_fd[0]);

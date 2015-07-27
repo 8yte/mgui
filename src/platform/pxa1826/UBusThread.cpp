@@ -1,5 +1,6 @@
 #include <core/Logger.h>
 #include <MGuiPlatform.h>
+#include <iostream>
 #include "UBusThread.h"
 
 namespace MGUI
@@ -11,13 +12,12 @@ static void UBusThreadEvent(struct uloop_fd *u, unsigned int events)
 {
     PlatformEvent event;
     read(u->fd, &event, sizeof(event));
-    std::cout << "UBusThreadEvent: " << event <<std::endl;
+    std::cout << "UBusThreadEvent: " << event << std::endl;
+    //TODO - put ril to sleep
 }
 
-UBusThread::UBusThread(StatusBar* top, BottomBar* bottom, int fd)
-        : Thread(),
-          _top(top),
-          _bottom(bottom)
+UBusThread::UBusThread(int fd)
+        : Thread()
 {
     ILOG_TRACE(UBUS_THREAD);
 
@@ -30,12 +30,6 @@ UBusThread::UBusThread(StatusBar* top, BottomBar* bottom, int fd)
     _ubus_fd.cb = UBusThreadEvent;
     _ubus_fd.fd = fd;
 
-    MGuiRil::Create(_ubus, _top);
-    MGuiCharger::Create(_ubus, _top);
-    MGuiWifi::Create(_ubus, _top);
-    MGuiStats::Create(_ubus, _top);
-    MGuiHawk::Create(_ubus, _bottom);
-
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
 
@@ -45,12 +39,6 @@ UBusThread::~UBusThread()
 
     ubus_free(_ubus);
     uloop_done();
-
-    MGuiRil::Destroy();
-    MGuiCharger::Destroy();
-    MGuiWifi::Destroy();
-    MGuiStats::Destroy();
-    MGuiHawk::Destroy();
 
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
@@ -62,6 +50,12 @@ UBusThread::run()
     uloop_fd_add(&_ubus_fd, ULOOP_READ);
     uloop_run();
     return 0;
+}
+
+ubus_context*
+UBusThread::GetContext()
+{
+    return _ubus;
 }
 
 } /* namespace MGUI */

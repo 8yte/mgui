@@ -3,11 +3,18 @@
 
 #include <core/Application.h>
 #include <core/PlatformManager.h>
-#include "StatusBar.h"
-#include "BottomBar.h"
+#include <ui/StatusBar.h>
+#include <ui/BottomBar.h>
 #ifdef PXA1826
 #include <platform/pxa1826/UBusThread.h>
 #include <platform/pxa1826/OnkeyThread.h>
+//#include <ril.h>
+//#include <rilutil.h>
+#include <platform/pxa1826/MGuiRil.h>
+#include <platform/pxa1826/MGuiCharger.h>
+#include <platform/pxa1826/MGuiWifi.h>
+#include <platform/pxa1826/MGuiStats.h>
+#include <platform/pxa1826/MGuiHawk.h>
 #endif
 
 namespace ilixi

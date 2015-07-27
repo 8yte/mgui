@@ -20,14 +20,14 @@ public:
 	~HawkRequest();
 
 	int
-	Request(enum PlatformRequest &req);
+	Request(const enum PlatformRequest &req);
 
 	virtual int
 	Callback(ubus_request *req, blob_attr *msg);
 
 private:
 	const char *
-	req_to_str(enum PlatformRequest &req);
+	req_to_str(const enum PlatformRequest &req);
 };
 
 };

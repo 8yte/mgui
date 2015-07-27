@@ -33,8 +33,17 @@ public:
 	virtual int
 	UnRegister();
 
-	int
-	Request(enum PlatformRequest &req);
+	void
+	Reset();
+
+	void
+	Fota();
+
+	void
+	Assert();
+
+	void
+	KeepAlive();
 
 protected:
 	MGuiHawk(ubus_context* ubus, BottomBar *bar);
@@ -53,4 +62,4 @@ private:
 
 } /* namespace MGUI */
 
-#endif /* SRC_MGUI_CHARGER_H_ */
+#endif /* SRC_MGUI_HAWK_H_ */

@@ -109,15 +109,28 @@ MGuiHawk::~MGuiHawk()
 {
 }
 
-int MGuiHawk::Request(enum PlatformRequest &req)
+void MGuiHawk::Reset()
 {
-	ILOG_TRACE_F(MGUI_HAWK);
+	if (_instance)
+		_request->Request(HawkResetReq);
+}
 
-	if (!_instance) {
-		ILOG_ERROR(MGUI_HAWK, "Not created!\n");
-		return  -1;
-	}
-	_request->Request(req);
+void MGuiHawk::Fota()
+{
+	if (_instance)
+		_request->Request(HawkFotaReq);
+}
+
+void MGuiHawk::Assert()
+{
+	if (_instance)
+		_request->Request(HawkNoDataAssertReq);
+}
+
+void MGuiHawk::KeepAlive()
+{
+	if (_instance)
+		_request->Request(HawkKeepAliveReq);
 }
 
 int MGuiHawk::Register()
