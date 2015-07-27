@@ -10,6 +10,7 @@ extern "C" {
 #include "ril.h"
 #include "rilutil.h"
 #include "MGuiRil.h"
+#include "MGuiCharger.h"
 
 namespace MGUI
 {
@@ -29,7 +30,6 @@ private:
     StatusBar* _bar;
     ubus_context* _ubus;
     uloop_fd _ubus_fd;
-    MGuiRil* _ril;
 };
 
 } /* namespace MGUI */

@@ -28,7 +28,9 @@ UBusThread::UBusThread(StatusBar* bar, int fd)
     ubus_add_uloop(_ubus);
     _ubus_fd.cb = UBusThreadEvent;
     _ubus_fd.fd = fd;
+
     MGuiRil::Create(_ubus, _bar);
+    MGuiCharger::Create(_ubus, _bar);
 
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
@@ -41,6 +43,7 @@ UBusThread::~UBusThread()
     uloop_done();
 
     MGuiRil::Destroy();
+    MGuiCharger::Destroy();
 
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }

@@ -43,7 +43,11 @@ mgui_SOURCES += platform/pxa1826/UBusThread.cpp \
 		platform/pxa1826/RilRequest.cpp \
 		platform/pxa1826/RilRequest.h \
 		platform/pxa1826/OnkeyThread.cpp \
-		platform/pxa1826/OnkeyThread.h
+		platform/pxa1826/OnkeyThread.h \
+		platform/pxa1826/ChargerRequest.cpp \
+		platform/pxa1826/ChargerRequest.h \
+		platform/pxa1826/MGuiCharger.cpp \
+		platform/pxa1826/MGuiCharger.h
 endif
 
 mgui_CPPFLAGS	= $(AM_CFLAGS) $(ILIXI_CFLAGS)
