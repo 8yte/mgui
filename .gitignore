@@ -38,3 +38,7 @@ configure
 src/Makefile.in
 Makefile.in
 
+build/depcomp
+build/install-sh
+build/missing
+

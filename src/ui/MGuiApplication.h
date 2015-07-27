@@ -6,6 +6,7 @@
 #include "BottomBar.h"
 #ifdef PXA1826
 #include <platform/pxa1826/UBusThread.h>
+#include <platform/pxa1826/OnkeyThread.h>
 #endif
 
 namespace ilixi
@@ -29,7 +30,8 @@ private:
     StatusBar* _statusBar;
     BottomBar* _bottomBar;
 #ifdef PXA1826
-    UBusThread* _thread;
+    UBusThread* _ubus;
+    OnkeyThread* _onkey;
 #endif
     ilixi::PushButton* _resetButton;
     ilixi::PushButton* _fotaButton;

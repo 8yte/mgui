@@ -41,7 +41,9 @@ mgui_SOURCES += platform/pxa1826/UBusThread.cpp \
 		platform/pxa1826/MGuiRil.cpp \
 		platform/pxa1826/MGuiRil.h \
 		platform/pxa1826/RilRequest.cpp \
-		platform/pxa1826/RilRequest.h
+		platform/pxa1826/RilRequest.h \
+		platform/pxa1826/OnkeyThread.cpp \
+		platform/pxa1826/OnkeyThread.h
 endif
 
 mgui_CPPFLAGS	= $(AM_CFLAGS) $(ILIXI_CFLAGS)
