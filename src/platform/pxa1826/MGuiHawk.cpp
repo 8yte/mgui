@@ -1,6 +1,8 @@
 #include <core/Logger.h>
 #include <ui/BottomBar.h>
 #include <cutils/properties.h>
+#include <iostream>
+#include <fstream>
 #include "MGuiHawk.h"
 
 #define HAWK_UBUS_ID	"hawk"
@@ -37,24 +39,46 @@ MGuiHawk* MGuiHawk::Instance()
 	return _instance;
 }
 
+#define VERSION_PATH "/etc/mversion"
+
+std::string
+MGuiHawk::GetVersion()
+{
+	std::string line;
+	std::ifstream mversion("/etc/mversion");
+
+	if (mversion.is_open()) {
+		getline(mversion, line);
+		mversion.close();
+	} else {
+		ILOG_ERROR(MGUI_HAWK, "can't open /etc/mversion\n");
+		line.assign("ERROR");
+	}
+
+	return line;	
+}
+
 void MGuiHawk::SetVersion()
 {
 	int len, retries = 20;
-	char version[100];
+	char hawk_version[100];
+	std::string version("Hawk Version: ");
 
-	len = property_get("persist.hawk.build_version", version, "Version Unknown");
+	len = property_get("persist.hawk.build_version", hawk_version, "Version Unknown");
 
 	while (!len && --retries) {
 		ILOG_INFO(MGUI_HAWK, "retry get hawk version");
-		len = property_get("persist.hawk.build_version", version, "Version Unknown");
+		len = property_get("persist.hawk.build_version", hawk_version, "Version Unknown");
 		sleep(1);
 	}
 
 	if (len) {
-		ILOG_INFO(MGUI_HAWK, "hawk version: %s", version);
+		ILOG_INFO(MGUI_HAWK, "hawk version: %s", hawk_version);
 	} else {
 		ILOG_INFO(MGUI_HAWK, "Failed to get hawk version");
 	}
+
+	version = version + std::string(hawk_version);
 
 	_bar->SetVersion(version);
 }

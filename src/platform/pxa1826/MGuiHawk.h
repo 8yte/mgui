@@ -55,6 +55,9 @@ protected:
 	~MGuiHawk();
 
 private:
+	std::string
+	GetVersion();
+
 	void
 	SetVersion();
 
