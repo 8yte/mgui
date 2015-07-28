@@ -1,6 +1,7 @@
 #include "MGuiApplication.h"
 #include <ui/PushButton.h>
 #include <ui/ToolButton.h>
+#include <ui/Dialog.h>
 #include <core/Logger.h>
 
 namespace MGUI
@@ -21,22 +22,32 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	addWidget(_bottomBar);
 
 	_resetButton = new ilixi::PushButton("Reset");
+	_resetDialog = new ilixi::Dialog("Reset", ilixi::Dialog::OKCancelButtonOption);
+	_resetButton->sigReleased.connect(sigc::mem_fun(_resetDialog, &ilixi::Dialog::execute));
 	_resetButton->setGeometry(5, 30, 160, 38);
 	addWidget(_resetButton);
 
 	_fotaButton = new ilixi::PushButton("Fota");
+	_fotaDialog = new ilixi::Dialog("Fota", ilixi::Dialog::OKCancelButtonOption);
+	_fotaButton->sigReleased.connect(sigc::mem_fun(_fotaDialog, &ilixi::Dialog::execute));
 	_fotaButton->setGeometry(5, 73, 160, 38);
 	addWidget(_fotaButton);
 
-	_assertButton = new ilixi::PushButton("No data assert");
+	_assertButton = new ilixi::PushButton("No Data Assert");
+	_assertDialog = new ilixi::Dialog("No Data Assert", ilixi::Dialog::OKCancelButtonOption);
+	_assertButton->sigReleased.connect(sigc::mem_fun(_assertDialog, &ilixi::Dialog::execute));
 	_assertButton->setGeometry(5, 116, 160, 38);
 	addWidget(_assertButton);
 
-	_keepAliveButton = new ilixi::PushButton("Keep alive");
+	_keepAliveButton = new ilixi::PushButton("Keep Alive");
+	_keepAliveDialog = new ilixi::Dialog("Keep Alive", ilixi::Dialog::OKCancelButtonOption);
+	_keepAliveButton->sigReleased.connect(sigc::mem_fun(_keepAliveDialog, &ilixi::Dialog::execute));
 	_keepAliveButton->setGeometry(5, 159, 160, 38);
 	addWidget(_keepAliveButton);
 
-	_forceUploadeButton = new ilixi::PushButton("force upload");
+	_forceUploadeButton = new ilixi::PushButton("Force Upload");
+	_forceUploadDialog = new ilixi::Dialog("Force Upload", ilixi::Dialog::OKCancelButtonOption);
+	_forceUploadeButton->sigReleased.connect(sigc::mem_fun(_forceUploadDialog, &ilixi::Dialog::execute));
 	_forceUploadeButton->setGeometry(5, 202, 160, 38);
 	addWidget(_forceUploadeButton);
 
@@ -64,11 +75,12 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	MGuiStats::Create(_ubus->GetContext(), _statusBar);
 	MGuiHawk::Create(_ubus->GetContext(), _bottomBar);
 
-	_resetButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Reset));
-	_fotaButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Fota));
-	_assertButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Assert));
-	_keepAliveButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::KeepAlive));
-	_forceUploadeButton->sigReleased.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::ForceUpload));
+	_resetDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Reset));
+	_fotaDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Fota));
+	_assertDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Assert));
+	_keepAliveDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::KeepAlive));
+	_forceUploadDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::ForceUpload));
+
 #endif
 
 	_timer = new ilixi::Timer();

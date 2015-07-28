@@ -8,8 +8,6 @@
 #ifdef PXA1826
 #include <platform/pxa1826/UBusThread.h>
 #include <platform/pxa1826/OnkeyThread.h>
-//#include <ril.h>
-//#include <rilutil.h>
 #include <platform/pxa1826/MGuiRil.h>
 #include <platform/pxa1826/MGuiCharger.h>
 #include <platform/pxa1826/MGuiWifi.h>
@@ -21,6 +19,7 @@ namespace ilixi
 {
 class PushButton;
 class ToolButton;
+class Dialog;
 }
 
 namespace MGUI
@@ -57,10 +56,15 @@ private:
     OnkeyThread* _onkey;
 #endif
     ilixi::PushButton* _resetButton;
+    ilixi::Dialog* _resetDialog;
     ilixi::PushButton* _fotaButton;
+    ilixi::Dialog* _fotaDialog;
     ilixi::PushButton* _assertButton;
+    ilixi::Dialog* _assertDialog;
     ilixi::PushButton* _keepAliveButton;
+    ilixi::Dialog* _keepAliveDialog;
     ilixi::PushButton* _forceUploadeButton;
+    ilixi::Dialog* _forceUploadDialog;
 
     ilixi::ToolButton* _cellular;
     ilixi::ToolButton* _wireless;
