@@ -16,8 +16,12 @@ static void UBusThreadEvent(struct uloop_fd *u, unsigned int events)
     //TODO - put ril to sleep
 }
 
-UBusThread::UBusThread(int fd)
-        : Thread()
+UBusThread::UBusThread(StatusBar* top, BottomBar* bottom, ilixi::ToolButton* cellular, ilixi::ToolButton* wireless, int fd)
+        : Thread(),
+          _top(top),
+          _bottom(bottom),
+          _cellular(cellular),
+          _wireless(wireless)
 {
     ILOG_TRACE(UBUS_THREAD);
 
@@ -30,6 +34,12 @@ UBusThread::UBusThread(int fd)
     _ubus_fd.cb = UBusThreadEvent;
     _ubus_fd.fd = fd;
 
+    MGuiRil::Create(_ubus, _top, _cellular);
+    MGuiCharger::Create(_ubus, _top);
+    MGuiWifi::Create(_ubus, _top, _wireless);
+    MGuiStats::Create(_ubus, _top);
+    MGuiHawk::Create(_ubus, _bottom);
+
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
 
@@ -39,6 +49,12 @@ UBusThread::~UBusThread()
 
     ubus_free(_ubus);
     uloop_done();
+
+    MGuiRil::Destroy();
+    MGuiCharger::Destroy();
+    MGuiWifi::Destroy();
+    MGuiStats::Destroy();
+    MGuiHawk::Destroy();
 
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }
@@ -50,12 +66,6 @@ UBusThread::run()
     uloop_fd_add(&_ubus_fd, ULOOP_READ);
     uloop_run();
     return 0;
-}
-
-ubus_context*
-UBusThread::GetContext()
-{
-    return _ubus;
 }
 
 } /* namespace MGUI */

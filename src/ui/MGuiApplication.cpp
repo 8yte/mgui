@@ -70,17 +70,11 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	/* init pipe */
 	if (pipe(_fd))
 		ILOG_THROW(MGUI_APP, "pipe failed with error\n");
-	_ubus = new UBusThread(_fd[0]);
+	_ubus = new UBusThread(_statusBar, _bottomBar, _cellular, _wireless, _fd[0]);
 	_ubus->start();
 	_onkey = new OnkeyThread(_fd[1]);
 	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateToggle));
 	_onkey->start();
-	
-	MGuiRil::Create(_ubus->GetContext(), _statusBar, _cellular);
-	MGuiCharger::Create(_ubus->GetContext(), _statusBar);
-	MGuiWifi::Create(_ubus->GetContext(), _statusBar, _wireless);
-	MGuiStats::Create(_ubus->GetContext(), _statusBar);
-	MGuiHawk::Create(_ubus->GetContext(), _bottomBar);
 
 	_resetDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Reset));
 	_fotaDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Fota));
@@ -100,10 +94,6 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 MGuiApplication::~MGuiApplication()
 {
 #ifdef PXA1826
-	MGuiRil::Destroy();
-	MGuiCharger::Destroy();
-	MGuiWifi::Destroy();
-	MGuiStats::Destroy();
 	MGuiHawk::Destroy();
 	_onkey->cancel();
 	_ubus->cancel();
