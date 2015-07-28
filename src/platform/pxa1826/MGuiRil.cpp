@@ -1,5 +1,6 @@
 #include <core/Logger.h>
 #include <ui/StatusBar.h>
+#include <ui/ToolButton.h>
 #include "MGuiRil.h"
 
 #define RIL_UBUS_ID		"ril"
@@ -146,7 +147,7 @@ MGuiRil* MGuiRil::Instance()
 	return _instance;
 }
 
-int MGuiRil::Create(ubus_context *ubus, StatusBar *bar)
+int MGuiRil::Create(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* button)
 {
 	int ret;
 
@@ -156,7 +157,7 @@ int MGuiRil::Create(ubus_context *ubus, StatusBar *bar)
 		return -1;
 	}
 
-	_instance = new MGuiRil(ubus, bar);
+	_instance = new MGuiRil(ubus, bar, button);
 	ret = _instance->Register();
 	if (ret) {
 		ILOG_ERROR(MGUI_RIL, "Register failed (ret=%d)\n", ret);
@@ -187,18 +188,15 @@ void MGuiRil::Destroy()
 	}
 }
 
-MGuiRil::MGuiRil(ubus_context *ubus, StatusBar *bar)
- : UBusClient(ubus)
+MGuiRil::MGuiRil(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* button)
+	: UBusClient(ubus),
+	_button(button),
+	_bar(bar)
 {
-	ILOG_TRACE(MGUI_RIL);
-	_bar = bar;
-	ILOG_DEBUG(MGUI_RIL, "%s exit\n", __FUNCTION__);
 }
 
 MGuiRil::~MGuiRil()
 {
-	ILOG_TRACE(MGUI_RIL);
-	ILOG_DEBUG(MGUI_RIL, "%s exit\n", __FUNCTION__);
 }
 
 void MGuiRil::SendRequests()
@@ -231,7 +229,7 @@ int MGuiRil::Register()
 		goto unregister;
 	}
 
-	_operator = new RilOperator(_subscriber, _id, _ubus, _bar);
+	_operator = new RilOperator(_subscriber, _id, _ubus, _bar, _button);
 	_simcard = new RilSimcard(_subscriber, _id, _ubus, _bar);
 	_registration = new RilRegistration(_subscriber, _id, _ubus, _bar);
 	_screen = new RilScreen(_subscriber, _id, _ubus);

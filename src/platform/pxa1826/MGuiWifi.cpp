@@ -1,5 +1,6 @@
 #include <core/Logger.h>
 #include <ui/StatusBar.h>
+#include <ui/ToolButton.h>
 #include "MGuiWifi.h"
 
 #define WIFI_UBUS_ID			"wireless"
@@ -109,7 +110,7 @@ int MGuiWifi::Update(blob_attr *msg)
 		return ret;
 	}
 
-	//TODO update WiFi SSID in UI
+	_button->setText(_status.ssid);
 	ILOG_INFO(MGUI_WIFI, "WIFI info: device=%s, on=%s, channel=%s, ssid=%s\n",
 		  _status.device.c_str(), _status.on.c_str(),
 		  _status.channel.c_str(), _status.ssid.c_str());
@@ -128,7 +129,7 @@ MGuiWifi* MGuiWifi::Instance()
 	return _instance;
 }
 
-int MGuiWifi::Create(ubus_context *ubus, StatusBar *bar)
+int MGuiWifi::Create(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* button)
 {
 	int ret;
 
@@ -138,7 +139,7 @@ int MGuiWifi::Create(ubus_context *ubus, StatusBar *bar)
 		return -1;
 	}
 
-	_instance = new MGuiWifi(ubus, bar);
+	_instance = new MGuiWifi(ubus, bar, button);
 	ret = _instance->Register();
 	if (ret) {
 		ILOG_ERROR(MGUI_WIFI, "Register failed (ret=%d)\n", ret);
@@ -165,9 +166,10 @@ void MGuiWifi::Destroy()
 	}
 }
 
-MGuiWifi::MGuiWifi(ubus_context *ubus, StatusBar *bar)
+MGuiWifi::MGuiWifi(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* button)
  : UBusClient(ubus),
-   _bar(bar)
+   _bar(bar),
+   _button(button)
 {
 }
 

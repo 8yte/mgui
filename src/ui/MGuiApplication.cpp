@@ -9,9 +9,14 @@ namespace MGUI
 
 D_DEBUG_DOMAIN(MGUI_APP, "Mgui/Application", "Mgui App");
 
+ilixi::IconPack* MGuiApplication::__iconPack = NULL;
+
 MGuiApplication::MGuiApplication(int argc, char* argv[])
 	: Application(&argc, &argv)
 {
+	__iconPack = new ilixi::IconPack();
+	__iconPack->parseIcons(DATADIR"/themes/mgui/IconPack.xml");
+
 	setBackgroundImage(DATADIR"/themes/mgui/bg.dfiff");
 	_statusBar = new StatusBar();
 	_statusBar->setGeometry(5, 0, 470, 24);
@@ -53,9 +58,11 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 
 	_cellular = new ilixi::ToolButton("Cellular");
 	_cellular->setGeometry(315, 48, 160, 80);
+	//_cellular->setIcon(__iconPack->getIcon("cellular_4_bar")->getImagePath());
 	addWidget(_cellular);
 
 	_wireless = new ilixi::ToolButton("Wireless");
+	//_wireless->setIcon(__iconPack->getIcon("wifi_4_bar")->getImagePath());
 	_wireless->setGeometry(315, 138, 160, 80);
 	addWidget(_wireless);
 
@@ -69,9 +76,9 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateToggle));
 	_onkey->start();
 	
-	MGuiRil::Create(_ubus->GetContext(), _statusBar);
+	MGuiRil::Create(_ubus->GetContext(), _statusBar, _cellular);
 	MGuiCharger::Create(_ubus->GetContext(), _statusBar);
-	MGuiWifi::Create(_ubus->GetContext(), _statusBar);
+	MGuiWifi::Create(_ubus->GetContext(), _statusBar, _wireless);
 	MGuiStats::Create(_ubus->GetContext(), _statusBar);
 	MGuiHawk::Create(_ubus->GetContext(), _bottomBar);
 

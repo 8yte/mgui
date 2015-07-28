@@ -39,7 +39,7 @@ protected:
 class RilOperator : public RilRequest
 {
 public:
-    RilOperator(ubus_subscriber &subscriber, uint32_t &ubus_id, ubus_context *ubus, StatusBar *bar);
+    RilOperator(ubus_subscriber &subscriber, uint32_t &ubus_id, ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* _button);
 
     virtual
     ~RilOperator();
@@ -52,6 +52,7 @@ public:
 
 private:
     StatusBar* _bar;
+    ilixi::ToolButton* _button;
 };
 
 class RilSimcard : public RilRequest

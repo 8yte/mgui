@@ -54,6 +54,7 @@ private:
     void
     Touch(bool on);
 
+    static ilixi::IconPack* __iconPack;
     MguiApplicationState _state;
     StatusBar* _statusBar;
     BottomBar* _bottomBar;

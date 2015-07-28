@@ -20,7 +20,7 @@ public:
 		      const char *method, struct blob_attr *msg);
 
     static int
-    Create(ubus_context *ubus, StatusBar *bar);
+    Create(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* button);
 
     static void
     Destroy();
@@ -35,7 +35,7 @@ public:
     SendRequests();
 
 protected:
-    MGuiRil(ubus_context* ubus, StatusBar* bar);
+    MGuiRil(ubus_context* ubus, StatusBar* bar, ilixi::ToolButton* button);
 
     virtual
     ~MGuiRil();
@@ -58,6 +58,7 @@ private:
     RilSimcard* _simcard;
     RilRegistration* _registration;
     RilScreen* _screen;
+    ilixi::ToolButton* _button;
 };
 
 } /* namespace MGUI */

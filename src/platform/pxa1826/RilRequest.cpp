@@ -1,5 +1,6 @@
 #include <core/Logger.h>
 #include <ui/StatusBar.h>
+#include <ui/ToolButton.h>
 #include "RilRequest.h"
 
 #define RIL_UBUS_REQ		"ril_request"
@@ -58,10 +59,11 @@ void RilRequest::Indication(uint32_t &id, void *data, int len)
 /***************************************************************************/
 /**		RilOperator Class Implementation
 /***************************************************************************/
-RilOperator::RilOperator(ubus_subscriber &subscriber, uint32_t &ubus_id, ubus_context* ubus, StatusBar *bar)
-	: RilRequest(subscriber, ubus_id, ubus)
+RilOperator::RilOperator(ubus_subscriber &subscriber, uint32_t &ubus_id, ubus_context* ubus, StatusBar *bar, ilixi::ToolButton *button)
+	: RilRequest(subscriber, ubus_id, ubus),
+	_button(button),
+	_bar(bar)
 {
-	_bar = bar;
 }
 
 RilOperator::~RilOperator()
@@ -100,11 +102,11 @@ int RilOperator::Callback(ubus_request *req, blob_attr *msg)
 
 	if (!resp || resp->num != 3) {
 		ILOG_ERROR(MGUI_OPERATOR, "No operator found\n");
-		//TODO: UPDATE OPERATOR TO NO SERVICE
+		_button->setText("Operator Unknown");
 	} else {
 		/* operator present */
 		ILOG_DEBUG(MGUI_OPERATOR, "Operator = %s\n", resp->str[0]);
-		//TODO: UPDATE OPERATOR TO resp->str[0]
+		_button->setText(resp->str[0]);
 	}
 
 	if (data)
