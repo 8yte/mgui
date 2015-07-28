@@ -5,22 +5,28 @@ SET(SOURCES
 	MGuiPlatform.h
 	BatteryIcon.cpp
 	BatteryIcon.h
-	BottomBar.cpp
-	BottomBar.h
 	BTIcon.cpp
 	BTIcon.h
 	CellularIcon.cpp
 	CellularIcon.h
 	GPSIcon.cpp
 	GPSIcon.h
+	HawkScreen.cpp
+	HawkScreen.h
+	HomeScreen.cpp
+	HomeScreen.h
 	MGuiApplication.cpp
 	MGuiApplication.h
+	ScreenBase.cpp
+	ScreenBase.h
 	SDCardIcon.cpp
 	SDCardIcon.h
 	SimIcon.cpp
 	SimIcon.h
 	SimpleIcon.cpp
 	SimpleIcon.h
+	StatScreen.cpp
+	StatScreen.h
 	StatusBar.cpp
 	StatusBar.h
 	UBusThread.cpp

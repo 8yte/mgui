@@ -7,8 +7,6 @@ mgui_SOURCES	= main.cpp \
 		ui/MGuiPlatform.h \
 		ui/BatteryIcon.cpp \
 		ui/BatteryIcon.h \
-		ui/BottomBar.cpp \
-		ui/BottomBar.h \
 		ui/BTIcon.cpp \
 		ui/BTIcon.h \
 		ui/CellularIcon.cpp \
@@ -17,14 +15,22 @@ mgui_SOURCES	= main.cpp \
 		ui/CellularTechIcon.h \
 		ui/GPSIcon.cpp \
 		ui/GPSIcon.h \
+		ui/HawkScreen.cpp \
+		ui/HawkScreen.h \
+		ui/HomeScreen.cpp \
+		ui/HomeScreen.h \
 		ui/MGuiApplication.cpp \
 		ui/MGuiApplication.h \
+		ui/ScreenBase.cpp \
+		ui/ScreenBase.h \
 		ui/SDCardIcon.cpp \
 		ui/SDCardIcon.h \
 		ui/SimIcon.cpp \
 		ui/SimIcon.h \
 		ui/SimpleIcon.cpp \
 		ui/SimpleIcon.h \
+		ui/StatScreen.cpp \
+		ui/StatScreen.h \
 		ui/StatusBar.cpp \
 		ui/StatusBar.h \
 		ui/WiFiIcon.cpp \

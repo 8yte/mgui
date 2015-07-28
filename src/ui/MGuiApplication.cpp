@@ -1,8 +1,7 @@
 #include "MGuiApplication.h"
-#include <ui/PushButton.h>
-#include <ui/ToolButton.h>
-#include <ui/Dialog.h>
+
 #include <core/Logger.h>
+#include <sigc++/bind.h>
 
 namespace MGUI
 {
@@ -19,52 +18,50 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 
 	setBackgroundImage(DATADIR"/themes/mgui/bg.dfiff");
 	_statusBar = new StatusBar();
-	_statusBar->setGeometry(5, 0, 470, 24);
+	_statusBar->setGeometry(210, 224, 270, 48);
 	addWidget(_statusBar);
 
-	_bottomBar = new BottomBar();
-	_bottomBar->setGeometry(0, 248, 480, 24);
-	addWidget(_bottomBar);
+	_homeButton = new ilixi::ToolButton("");
+	_homeButton->setGeometry(0, 224, 56, 56);
+	_homeButton->setCheckable(true);
+	_homeButton->setChecked(true);
+	_homeButton->setDrawFrame(false);
+	_homeButton->setToolButtonStyle(ilixi::ToolButton::IconAboveText);
+	_homeButton->sigClicked.connect(sigc::bind<int>(sigc::mem_fun(this, &MGuiApplication::switchScreen), 0));
+	_homeButton->setIcon(DATADIR"/themes/mgui/home.png", ilixi::Size(24, 24));
+	addWidget(_homeButton);
 
-	_resetButton = new ilixi::PushButton("Reset");
-	_resetDialog = new ilixi::Dialog("Reset", ilixi::Dialog::OKCancelButtonOption);
-	_resetButton->sigReleased.connect(sigc::mem_fun(_resetDialog, &ilixi::Dialog::execute));
-	_resetButton->setGeometry(5, 30, 160, 38);
-	addWidget(_resetButton);
+	_hawkButton = new ilixi::ToolButton("");
+	_hawkButton->setGeometry(59, 224, 56, 56);
+	_hawkButton->setCheckable(true);
+	_hawkButton->setDrawFrame(false);
+	_hawkButton->setToolButtonStyle(ilixi::ToolButton::IconAboveText);
+	_hawkButton->sigClicked.connect(sigc::bind<int>(sigc::mem_fun(this, &MGuiApplication::switchScreen), 1));
+	_hawkButton->setIcon(DATADIR"/themes/mgui/home.png", ilixi::Size(24, 24));
+  addWidget(_hawkButton);
 
-	_fotaButton = new ilixi::PushButton("Fota");
-	_fotaDialog = new ilixi::Dialog("Fota", ilixi::Dialog::OKCancelButtonOption);
-	_fotaButton->sigReleased.connect(sigc::mem_fun(_fotaDialog, &ilixi::Dialog::execute));
-	_fotaButton->setGeometry(5, 73, 160, 38);
-	addWidget(_fotaButton);
+  _statButton = new ilixi::ToolButton("");
+  _statButton->setGeometry(118, 224, 56, 56);
+  _statButton->setCheckable(true);
+  _statButton->setDrawFrame(false);
+  _statButton->setToolButtonStyle(ilixi::ToolButton::IconAboveText);
+  _statButton->sigClicked.connect(sigc::bind<int>(sigc::mem_fun(this, &MGuiApplication::switchScreen), 2));
+  _statButton->setIcon(DATADIR"/themes/mgui/home.png", ilixi::Size(24, 24));
+  addWidget(_statButton);
 
-	_assertButton = new ilixi::PushButton("No Data Assert");
-	_assertDialog = new ilixi::Dialog("No Data Assert", ilixi::Dialog::OKCancelButtonOption);
-	_assertButton->sigReleased.connect(sigc::mem_fun(_assertDialog, &ilixi::Dialog::execute));
-	_assertButton->setGeometry(5, 116, 160, 38);
-	addWidget(_assertButton);
+	_homeScreen = new HomeScreen();
+  _homeScreen->setGeometry(0, 0, 480, 224);
+  addWidget(_homeScreen);
 
-	_keepAliveButton = new ilixi::PushButton("Keep Alive");
-	_keepAliveDialog = new ilixi::Dialog("Keep Alive", ilixi::Dialog::OKCancelButtonOption);
-	_keepAliveButton->sigReleased.connect(sigc::mem_fun(_keepAliveDialog, &ilixi::Dialog::execute));
-	_keepAliveButton->setGeometry(5, 159, 160, 38);
-	addWidget(_keepAliveButton);
+  _hawkScreen = new HawkScreen();
+  _hawkScreen->setVisible(false);
+  _hawkScreen->setGeometry(0, 0, 480, 224);
+  addWidget(_hawkScreen);
 
-	_forceUploadeButton = new ilixi::PushButton("Force Upload");
-	_forceUploadDialog = new ilixi::Dialog("Force Upload", ilixi::Dialog::OKCancelButtonOption);
-	_forceUploadeButton->sigReleased.connect(sigc::mem_fun(_forceUploadDialog, &ilixi::Dialog::execute));
-	_forceUploadeButton->setGeometry(5, 202, 160, 38);
-	addWidget(_forceUploadeButton);
-
-	_cellular = new ilixi::ToolButton("Cellular");
-	_cellular->setGeometry(315, 48, 160, 80);
-	//_cellular->setIcon(__iconPack->getIcon("cellular_4_bar")->getImagePath());
-	addWidget(_cellular);
-
-	_wireless = new ilixi::ToolButton("Wireless");
-	//_wireless->setIcon(__iconPack->getIcon("wifi_4_bar")->getImagePath());
-	_wireless->setGeometry(315, 138, 160, 80);
-	addWidget(_wireless);
+  _statScreen = new StatScreen();
+  _statScreen->setVisible(false);
+  _statScreen->setGeometry(0, 0, 480, 224);
+  addWidget(_statScreen);
 
 #ifdef PXA1826
 	/* init pipe */
@@ -75,12 +72,6 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	_onkey = new OnkeyThread(_fd[1]);
 	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateToggle));
 	_onkey->start();
-
-	_resetDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Reset));
-	_fotaDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Fota));
-	_assertDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Assert));
-	_keepAliveDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::KeepAlive));
-	_forceUploadDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::ForceUpload));
 
 #endif
 
@@ -200,6 +191,36 @@ MGuiApplication::windowPreEventFilter(const DFBWindowEvent& event)
 		_timer->restart();
 	}
 	return false;
+}
+
+void
+MGuiApplication::switchScreen(int screen)
+{
+    if (screen == 0)
+    {
+        _homeScreen->setVisible(true);
+        _hawkScreen->setVisible(false);
+        _statScreen->setVisible(false);
+        _homeButton->setChecked(true);
+        _hawkButton->setChecked(false);
+        _statButton->setChecked(false);
+    } else if (screen == 1)
+    {
+        _homeScreen->setVisible(false);
+        _hawkScreen->setVisible(true);
+        _statScreen->setVisible(false);
+        _homeButton->setChecked(false);
+        _hawkButton->setChecked(true);
+        _statButton->setChecked(false);
+    } else if (screen == 2)
+    {
+        _homeScreen->setVisible(false);
+        _hawkScreen->setVisible(false);
+        _statScreen->setVisible(true);
+        _homeButton->setChecked(false);
+        _hawkButton->setChecked(false);
+        _statButton->setChecked(true);
+    }
 }
 
 } /* namespace MGUI */
