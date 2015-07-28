@@ -66,7 +66,7 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	_ubus = new UBusThread(_fd[0]);
 	_ubus->start();
 	_onkey = new OnkeyThread(_fd[1]);
-	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateChange));
+	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateToggle));
 	_onkey->start();
 	
 	MGuiRil::Create(_ubus->GetContext(), _statusBar);
@@ -84,8 +84,10 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 #endif
 
 	_timer = new ilixi::Timer();
-	_timer->sigExec.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateChange));
+	_timer->sigExec.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateToggle));
 	_timer->start(30000);
+
+	MGuiSetState(MGuiAppStateOn);
 }
 
 MGuiApplication::~MGuiApplication()
@@ -155,26 +157,52 @@ MGuiApplication::Screen(bool on)
 	ILOG_DEBUG(MGUI_APP, "%s: Exit\n", __func__);
 }
 
+
 void
-MGuiApplication::MGuiStateChange()
+MGuiApplication::MGuiSetState(const MguiApplicationState &state)
+{
+	ILOG_TRACE(MGUI_APP);
+
+	if (state == MGuiAppStateOn) {
+		Screen(true);
+		Touch(true);
+		_state = MGuiAppStateOn;
+		_timer->restart();
+	} else {
+		Screen(false);
+		Touch(false);
+		_state = MGuiAppStateOff;
+		_timer->stop();
+	}
+
+	ILOG_DEBUG(MGUI_APP, "%s: Exit\n", __func__);
+}
+
+void
+MGuiApplication::MGuiStateToggle()
 {
 	ILOG_TRACE(MGUI_APP);
 
 	if (_state == MGuiAppStateOn) {
 		ILOG_DEBUG(MGUI_APP, "Going to sleep...\n");
-		Screen(false);
-		Touch(false);
-		_state = MGuiAppStateOff;
-		_timer->stop();
+		MGuiSetState(MGuiAppStateOff);
 	} else {
 		ILOG_DEBUG(MGUI_APP, "Waking up...\n");
-		Screen(true);
-		Touch(true);
-		_state = MGuiAppStateOn;
-		_timer->restart();
+		MGuiSetState(MGuiAppStateOn);
 	}
 
 	ILOG_DEBUG(MGUI_APP, "%s: Exit\n", __func__);
+}
+
+
+bool
+MGuiApplication::windowPreEventFilter(const DFBWindowEvent& event)
+{
+	if (_state == MGuiAppStateOn) {
+		ILOG_DEBUG(MGUI_APP, "%s: reschedule timer\n", __func__);
+		_timer->restart();
+	}
+	return false;
 }
 
 } /* namespace MGUI */

@@ -33,20 +33,28 @@ public:
     virtual
     ~MGuiApplication();
 
-    void
-    MGuiStateChange();
-
 private:
+    enum MguiApplicationState {
+        MGuiAppStateOn,
+        MGuiAppStateOff
+    };
+
+    void
+    MGuiStateToggle();
+
+    void
+    MGuiSetState(const MguiApplicationState &state);
+
+    virtual bool
+    windowPreEventFilter(const DFBWindowEvent& event);
+
     void
     Screen(bool on);
 
     void
     Touch(bool on);
 
-    enum MguiApplicationState {
-        MGuiAppStateOn,
-        MGuiAppStateOff
-    } _state;
+    MguiApplicationState _state;
     StatusBar* _statusBar;
     BottomBar* _bottomBar;
 
