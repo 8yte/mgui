@@ -73,10 +73,10 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateToggle));
 	_onkey->start();
 
+#endif
 	_timer = new ilixi::Timer();
 	_timer->sigExec.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateToggle));
 	_timer->start(30000);
-#endif
 
 	MGuiSetState(MGuiAppStateOn);
 }
