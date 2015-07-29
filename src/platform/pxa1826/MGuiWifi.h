@@ -8,6 +8,7 @@ namespace MGUI
 {
 
 class WifiRequest;
+class HomeScreen;
 
 class MGuiWifi : public UBusClient
 {
@@ -22,7 +23,7 @@ public:
 		      const char *method, struct blob_attr *msg);
 
 	static int
-	Create(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* button);
+	Create(ubus_context *ubus, StatusBar *bar, HomeScreen *home);
 
 	static void
 	Destroy();
@@ -37,7 +38,7 @@ public:
 	Update(blob_attr *msg);
 
 protected:
-	MGuiWifi(ubus_context* ubus, StatusBar* bar, ilixi::ToolButton* button);
+	MGuiWifi(ubus_context* ubus, StatusBar* bar, HomeScreen *home);
 
 	virtual
 	~MGuiWifi();
@@ -69,7 +70,7 @@ private:
 	static MGuiWifi* _instance;
 	WifiRequest* _request;
 	StatusBar* _bar;
-	ilixi::ToolButton* _button;
+	HomeScreen* _home;
 };
 
 } /* namespace MGUI */

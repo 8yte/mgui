@@ -45,11 +45,11 @@ HawkScreen::HawkScreen()
 	addChild(_forceUploadeButton);
 
 #ifdef PXA1826
-	_resetDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Reset));
-	_fotaDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Fota));
-	_assertDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::Assert));
-	_keepAliveDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::KeepAlive));
-	_forceUploadDialog->sigAccepted.connect(sigc::mem_fun(MGuiHawk::Instance(), &MGuiHawk::ForceUpload));
+	_resetDialog->sigAccepted.connect(sigc::mem_fun(this, &HawkScreen::HawkReset));
+	_fotaDialog->sigAccepted.connect(sigc::mem_fun(this, &HawkScreen::HawkFota));
+	_assertDialog->sigAccepted.connect(sigc::mem_fun(this, &HawkScreen::HawkNoData));
+	_keepAliveDialog->sigAccepted.connect(sigc::mem_fun(this, &HawkScreen::HawkKeepAlive));
+	_forceUploadDialog->sigAccepted.connect(sigc::mem_fun(this, &HawkScreen::HawkForceUpload));
 #endif
 }
 
@@ -62,4 +62,46 @@ HawkScreen::~HawkScreen()
 	delete _forceUploadDialog;
 }
 
-} /* namespace MGUI */
+void
+HawkScreen::HawkReset()
+{
+	//printf("%s%d: HERE\n", __FUNCTION__, __LINE__);
+	MGuiHawk::Instance()->Reset();
+}
+
+void
+HawkScreen::HawkKeepAlive()
+{
+	//printf("%s%d: HERE\n", __FUNCTION__, __LINE__);
+	MGuiHawk::Instance()->KeepAlive();
+}
+
+void
+HawkScreen::HawkNoData()
+{
+	//printf("%s%d: HERE\n", __FUNCTION__, __LINE__);
+	MGuiHawk::Instance()->Assert();
+}
+
+void
+HawkScreen::HawkFota()
+{
+	//printf("%s%d: HERE\n", __FUNCTION__, __LINE__);
+	MGuiHawk::Instance()->Fota();
+}
+
+void
+HawkScreen::HawkAssert()
+{
+	printf("%s%d: HERE\n", __FUNCTION__, __LINE__);
+}
+
+void
+HawkScreen::HawkForceUpload()
+{
+	//printf("%s%d: HERE\n", __FUNCTION__, __LINE__);
+	MGuiHawk::Instance()->ForceUpload();
+}
+
+}
+/* namespace MGUI */

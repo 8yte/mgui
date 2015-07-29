@@ -2,9 +2,8 @@
 #define SRC_UBUSTHREAD_H_
 
 #include <lib/Thread.h>
-#include <ui/StatusBar.h>
-#include <ui/BottomBar.h>
 #include <ui/ToolButton.h>
+#include <ui/StatusBar.h>
 extern "C" {
 #include <libubox/ustream.h>
 #include <libubus.h>
@@ -20,10 +19,15 @@ extern "C" {
 namespace MGUI
 {
 
+class HomeScreen;
+class HawkScreen;
+class StatScreen;
+class StatusBar;
+
 class UBusThread : public ilixi::Thread
 {
 public:
-    UBusThread(StatusBar* top, BottomBar *bottom , ilixi::ToolButton* cellular, ilixi::ToolButton* wireless, int fd);
+    UBusThread(StatusBar* bar, HomeScreen* home, HawkScreen* hawk, StatScreen* stat, int fd);
 
     virtual
     ~UBusThread();
@@ -32,12 +36,12 @@ public:
     run();
 
 private:
-    StatusBar* _top;
-    BottomBar* _bottom;
+    StatusBar* _bar;
     ubus_context* _ubus;
     uloop_fd _ubus_fd;
-    ilixi::ToolButton* _cellular;
-    ilixi::ToolButton* _wireless;
+    HomeScreen* _home;
+    HawkScreen* _hawk;
+    StatScreen* _stat;
 };
 
 } /* namespace MGUI */

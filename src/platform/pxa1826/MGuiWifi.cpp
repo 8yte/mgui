@@ -1,12 +1,10 @@
 #include <core/Logger.h>
 #include <ui/StatusBar.h>
 #include <ui/ToolButton.h>
+#include <ui/HomeScreen.h>
 #include "MGuiWifi.h"
 
 #define WIFI_UBUS_ID			"wireless"
-
-//#define STATISTICS_UBUS_ID		"statistics"
-//#define STATISTICS_UBUS_REQUEST	"get_wifi_status"
 
 namespace MGUI
 {
@@ -110,7 +108,8 @@ int MGuiWifi::Update(blob_attr *msg)
 		return ret;
 	}
 
-	_button->setText(_status.ssid);
+	_home->SetWirelessInfo(_status.ssid);
+
 	ILOG_INFO(MGUI_WIFI, "WIFI info: device=%s, on=%s, channel=%s, ssid=%s\n",
 		  _status.device.c_str(), _status.on.c_str(),
 		  _status.channel.c_str(), _status.ssid.c_str());
@@ -129,7 +128,7 @@ MGuiWifi* MGuiWifi::Instance()
 	return _instance;
 }
 
-int MGuiWifi::Create(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* button)
+int MGuiWifi::Create(ubus_context *ubus, StatusBar *bar, HomeScreen *home)
 {
 	int ret;
 
@@ -139,7 +138,7 @@ int MGuiWifi::Create(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* butt
 		return -1;
 	}
 
-	_instance = new MGuiWifi(ubus, bar, button);
+	_instance = new MGuiWifi(ubus, bar, home);
 	ret = _instance->Register();
 	if (ret) {
 		ILOG_ERROR(MGUI_WIFI, "Register failed (ret=%d)\n", ret);
@@ -166,10 +165,10 @@ void MGuiWifi::Destroy()
 	}
 }
 
-MGuiWifi::MGuiWifi(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* button)
+MGuiWifi::MGuiWifi(ubus_context *ubus, StatusBar *bar, HomeScreen *home)
  : UBusClient(ubus),
    _bar(bar),
-   _button(button)
+   _home(home)
 {
 }
 

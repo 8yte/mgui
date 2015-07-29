@@ -1,4 +1,7 @@
 #include <core/Logger.h>
+#include <ui/HomeScreen.h>
+#include <ui/HawkScreen.h>
+#include <ui/StatScreen.h>
 #include <MGuiPlatform.h>
 #include <iostream>
 #include "UBusThread.h"
@@ -16,12 +19,12 @@ static void UBusThreadEvent(struct uloop_fd *u, unsigned int events)
     //TODO - put ril to sleep
 }
 
-UBusThread::UBusThread(StatusBar* top, BottomBar* bottom, ilixi::ToolButton* cellular, ilixi::ToolButton* wireless, int fd)
+UBusThread::UBusThread(StatusBar* bar, HomeScreen* home, HawkScreen* hawk, StatScreen* stat, int fd)
         : Thread(),
-          _top(top),
-          _bottom(bottom),
-          _cellular(cellular),
-          _wireless(wireless)
+          _bar(bar),
+          _home(home),
+          _hawk(hawk),
+          _stat(stat)
 {
     ILOG_TRACE(UBUS_THREAD);
 
@@ -34,11 +37,11 @@ UBusThread::UBusThread(StatusBar* top, BottomBar* bottom, ilixi::ToolButton* cel
     _ubus_fd.cb = UBusThreadEvent;
     _ubus_fd.fd = fd;
 
-    MGuiRil::Create(_ubus, _top, _cellular);
-    MGuiCharger::Create(_ubus, _top);
-    MGuiWifi::Create(_ubus, _top, _wireless);
-    MGuiStats::Create(_ubus, _top);
-    MGuiHawk::Create(_ubus, _bottom);
+    MGuiRil::Create(_ubus, _bar, _home);
+    MGuiCharger::Create(_ubus, _bar);
+    MGuiWifi::Create(_ubus, _bar, _home);
+    MGuiStats::Create(_ubus, _bar, _home);
+    MGuiHawk::Create(_ubus, _hawk);
 
     ILOG_DEBUG(UBUS_THREAD, "%s exit\n", __func__);
 }

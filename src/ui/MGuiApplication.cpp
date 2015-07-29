@@ -8,14 +8,9 @@ namespace MGUI
 
 D_DEBUG_DOMAIN(MGUI_APP, "Mgui/Application", "Mgui App");
 
-ilixi::IconPack* MGuiApplication::__iconPack = NULL;
-
 MGuiApplication::MGuiApplication(int argc, char* argv[])
 	: Application(&argc, &argv)
 {
-	__iconPack = new ilixi::IconPack();
-	__iconPack->parseIcons(DATADIR"/themes/mgui/IconPack.xml");
-
 	setBackgroundImage(DATADIR"/themes/mgui/bg.dfiff");
 	_statusBar = new StatusBar();
 	_statusBar->setGeometry(210, 224, 270, 48);
@@ -67,8 +62,9 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	/* init pipe */
 	if (pipe(_fd))
 		ILOG_THROW(MGUI_APP, "pipe failed with error\n");
-	_ubus = new UBusThread(_statusBar, _bottomBar, _cellular, _wireless, _fd[0]);
+	_ubus = new UBusThread(_statusBar, _homeScreen, _hawkScreen, _statScreen, _fd[0]);
 	_ubus->start();
+	
 	_onkey = new OnkeyThread(_fd[1]);
 	_onkey->sigOnkeyPress.connect(sigc::mem_fun(this, &MGuiApplication::MGuiStateToggle));
 	_onkey->start();

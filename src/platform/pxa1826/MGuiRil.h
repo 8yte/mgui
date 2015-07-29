@@ -8,6 +8,8 @@
 namespace MGUI
 {
 
+class HomeScreen;
+
 class MGuiRil : public UBusClient
 {
 public:
@@ -19,8 +21,11 @@ public:
 		      struct ubus_request_data *req,
 		      const char *method, struct blob_attr *msg);
 
+    void
+    SignalStrengthInd(void *data, int len);
+
     static int
-    Create(ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* button);
+    Create(ubus_context *ubus, StatusBar *bar, HomeScreen *home);
 
     static void
     Destroy();
@@ -34,13 +39,46 @@ public:
     void
     SendRequests();
 
+    int
+    OperatorCallback(blob_attr *msg);
+
+    int
+    SimCallback(blob_attr *msg);
+
+    int
+    RegistrationCallback(blob_attr *msg);
+
 protected:
-    MGuiRil(ubus_context* ubus, StatusBar* bar, ilixi::ToolButton* button);
+    MGuiRil(ubus_context *ubus, StatusBar *bar, HomeScreen *home);
 
     virtual
     ~MGuiRil();
 
 private:
+    struct RegState {
+        unsigned int reg_state;
+        RIL_RadioTechnology radio_tech;
+    };
+
+    bool
+    registered_voice();
+
+    bool
+    registered_data();
+
+    CellularTechState
+    tech();
+
+    const char *
+    tech_to_str();
+
+    int
+    convertDbmToRssi(int rsrp);
+
+    int _rssi;
+    RegState _data;
+    RegState _voice;
+
     enum {
         REQID,
         ERRNO,
@@ -58,7 +96,8 @@ private:
     RilSimcard* _simcard;
     RilRegistration* _registration;
     RilScreen* _screen;
-    ilixi::ToolButton* _button;
+
+    HomeScreen* _home;
 };
 
 } /* namespace MGUI */

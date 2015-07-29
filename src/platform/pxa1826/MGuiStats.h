@@ -8,6 +8,7 @@ namespace MGUI
 {
 
 class StatsRequest;
+class HomeScreen;
 
 class MGuiStats : public UBusClient
 {
@@ -22,7 +23,7 @@ public:
 		      const char *method, struct blob_attr *msg);
 
 	static int
-	Create(ubus_context *ubus, StatusBar *bar);
+	Create(ubus_context *ubus, StatusBar *bar, HomeScreen *home);
 
 	static void
 	Destroy();
@@ -37,7 +38,7 @@ public:
 	Update(blob_attr *msg);
 
 protected:
-	MGuiStats(ubus_context* ubus, StatusBar* bar);
+	MGuiStats(ubus_context* ubus, StatusBar* bar, HomeScreen *home);
 
 	virtual
 	~MGuiStats();
@@ -70,6 +71,7 @@ private:
 	static MGuiStats* _instance;
 	StatsRequest* _request;
 	StatusBar* _bar;
+	HomeScreen* _home;
 	struct stats_info {
 		std::string wifi_status;
 		int num_clients;

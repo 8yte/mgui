@@ -8,6 +8,7 @@ namespace MGUI
 {
 
 class HawkRequest;
+class HawkScreen;
 
 class MGuiHawk : public UBusClient
 {
@@ -22,7 +23,7 @@ public:
 		      const char *method, struct blob_attr *msg);
 
 	static int
-	Create(ubus_context *ubus, BottomBar *bar);
+	Create(ubus_context *ubus, HawkScreen* hawk);
 
 	static void
 	Destroy();
@@ -49,7 +50,7 @@ public:
 	ForceUpload();
 
 protected:
-	MGuiHawk(ubus_context* ubus, BottomBar *bar);
+	MGuiHawk(ubus_context* ubus, HawkScreen* hawk);
 
 	virtual
 	~MGuiHawk();
@@ -63,7 +64,7 @@ private:
 
 	static MGuiHawk* _instance;
 	HawkRequest* _request;
-	BottomBar* _bar;
+	HawkScreen* _hawk;
 };
 
 } /* namespace MGUI */

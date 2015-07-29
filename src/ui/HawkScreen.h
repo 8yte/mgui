@@ -23,6 +23,24 @@ public:
 	~HawkScreen();
 
 private:
+	void
+	HawkReset();
+
+	void
+	HawkKeepAlive();
+
+	void
+	HawkNoData();
+
+	void
+	HawkFota();
+
+	void
+	HawkAssert();
+
+	void
+	HawkForceUpload();
+
 	ilixi::Label* _title;
 	ilixi::PushButton* _resetButton;
 	ilixi::Dialog* _resetDialog;

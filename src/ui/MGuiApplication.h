@@ -45,7 +45,6 @@ private:
     void
     switchScreen(int screen);
 
-    static ilixi::IconPack* __iconPack;
     MguiApplicationState _state;
     StatusBar* _statusBar;
 

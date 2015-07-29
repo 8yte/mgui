@@ -1,5 +1,6 @@
 #include <core/Logger.h>
 #include <ui/StatusBar.h>
+#include <ui/HomeScreen.h>
 #include "MGuiStats.h"
 
 #define STATISTICS_UBUS_ID		"statistics"
@@ -169,7 +170,7 @@ MGuiStats* MGuiStats::Instance()
 	return _instance;
 }
 
-int MGuiStats::Create(ubus_context *ubus, StatusBar *bar)
+int MGuiStats::Create(ubus_context *ubus, StatusBar *bar, HomeScreen *home)
 {
 	int ret;
 
@@ -179,7 +180,7 @@ int MGuiStats::Create(ubus_context *ubus, StatusBar *bar)
 		return -1;
 	}
 
-	_instance = new MGuiStats(ubus, bar);
+	_instance = new MGuiStats(ubus, bar, home);
 	ret = _instance->Register();
 	if (ret) {
 		ILOG_ERROR(MGUI_STATS, "Register failed (ret=%d)\n", ret);
@@ -206,9 +207,10 @@ void MGuiStats::Destroy()
 	}
 }
 
-MGuiStats::MGuiStats(ubus_context *ubus, StatusBar *bar)
+MGuiStats::MGuiStats(ubus_context *ubus, StatusBar *bar, HomeScreen *home)
  : UBusClient(ubus),
-   _bar(bar)
+   _bar(bar),
+   _home(home)
 {
 }
 

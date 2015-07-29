@@ -1,5 +1,4 @@
 #include <core/Logger.h>
-#include <ui/BottomBar.h>
 #include "HawkRequest.h"
 
 namespace MGUI

@@ -1,8 +1,8 @@
 #include <core/Logger.h>
-#include <ui/BottomBar.h>
 #include <cutils/properties.h>
 #include <iostream>
 #include <fstream>
+#include <ui/HawkScreen.h>
 #include "MGuiHawk.h"
 
 #define HAWK_UBUS_ID	"hawk"
@@ -73,17 +73,17 @@ void MGuiHawk::SetVersion()
 	}
 
 	if (len) {
-		ILOG_INFO(MGUI_HAWK, "hawk version: %s", hawk_version);
+		ILOG_INFO(MGUI_HAWK, "hawk version: %s\n", hawk_version);
 	} else {
 		ILOG_INFO(MGUI_HAWK, "Failed to get hawk version");
 	}
 
 	version = version + std::string(hawk_version);
 
-	_bar->SetVersion(version);
+	//_bar->SetVersion(version);
 }
 
-int MGuiHawk::Create(ubus_context *ubus, BottomBar *bar)
+int MGuiHawk::Create(ubus_context *ubus, HawkScreen* hawk)
 {
 	int ret;
 
@@ -93,7 +93,7 @@ int MGuiHawk::Create(ubus_context *ubus, BottomBar *bar)
 		return -1;
 	}
 
-	_instance = new MGuiHawk(ubus, bar);
+	_instance = new MGuiHawk(ubus, hawk);
 
 	_instance->SetVersion();
 
@@ -102,7 +102,6 @@ int MGuiHawk::Create(ubus_context *ubus, BottomBar *bar)
 		ILOG_ERROR(MGUI_HAWK, "Register failed (ret=%d)\n", ret);
 		goto out_error;
 	}
-	_instance->Register();
 
 	ILOG_DEBUG(MGUI_HAWK, "%s exit\n", __FUNCTION__);
 	return 0;
@@ -123,9 +122,9 @@ void MGuiHawk::Destroy()
 	}
 }
 
-MGuiHawk::MGuiHawk(ubus_context *ubus, BottomBar *bar)
+MGuiHawk::MGuiHawk(ubus_context *ubus, HawkScreen* hawk)
  : UBusClient(ubus),
-   _bar(bar)
+ _hawk(hawk)
 {
 }
 
@@ -135,32 +134,43 @@ MGuiHawk::~MGuiHawk()
 
 void MGuiHawk::Reset()
 {
-	if (_instance)
+	if (_instance) {
+		ILOG_ERROR(MGUI_HAWK, "%s: _request=%p\n", __FUNCTION__, _request);
 		_request->Request(HawkResetReq);
+	}
 }
 
 void MGuiHawk::Fota()
 {
-	if (_instance)
+	if (_instance) {
+		ILOG_ERROR(MGUI_HAWK, "%s: _request=%p\n", __FUNCTION__, _request);
 		_request->Request(HawkFotaReq);
+	}
 }
 
 void MGuiHawk::Assert()
 {
-	if (_instance)
+	if (_instance) {
+		ILOG_ERROR(MGUI_HAWK, "%s: _request=%p\n", __FUNCTION__, _request);
 		_request->Request(HawkNoDataAssertReq);
+	}
 }
 
 void MGuiHawk::KeepAlive()
 {
-	if (_instance)
+	if (_instance) {
+		ILOG_ERROR(MGUI_HAWK, "%s: _request=%p\n", __FUNCTION__, _request);
 		_request->Request(HawkKeepAliveReq);
+	}
 }
 
 void MGuiHawk::ForceUpload()
 {
-	if (_instance)
+	ILOG_ERROR(MGUI_HAWK, "%s: _request=%p\n", __FUNCTION__, _request);
+	if (_instance) {
+		ILOG_ERROR(MGUI_HAWK, "%s: _request=%p\n", __FUNCTION__, _request);
 		_request->Request(HawkForceUploadReq);
+	}
 }
 
 int MGuiHawk::Register()

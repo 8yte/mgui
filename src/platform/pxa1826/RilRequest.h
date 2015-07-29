@@ -29,9 +29,6 @@ public:
     virtual int
     Callback(ubus_request *req, blob_attr *msg) = 0;
 
-    virtual void
-    Indication(uint32_t &id, void *data, int len);
-
 protected:
     blob_buf _b;
 };
@@ -39,7 +36,8 @@ protected:
 class RilOperator : public RilRequest
 {
 public:
-    RilOperator(ubus_subscriber &subscriber, uint32_t &ubus_id, ubus_context *ubus, StatusBar *bar, ilixi::ToolButton* _button);
+    RilOperator(ubus_subscriber &subscriber,
+                uint32_t &ubus_id, ubus_context *ubus);
 
     virtual
     ~RilOperator();
@@ -49,16 +47,13 @@ public:
 
     virtual int
     Callback(ubus_request *req, blob_attr *msg);
-
-private:
-    StatusBar* _bar;
-    ilixi::ToolButton* _button;
 };
 
 class RilSimcard : public RilRequest
 {
 public:
-    RilSimcard(ubus_subscriber &subscriber, uint32_t &ubus_id, ubus_context *ubus, StatusBar *bar);
+    RilSimcard(ubus_subscriber &subscriber,
+               uint32_t &ubus_id, ubus_context *ubus);
 
     virtual
     ~RilSimcard();
@@ -68,15 +63,13 @@ public:
 
     virtual int
     Callback(ubus_request *req, blob_attr *msg);
-
-private:
-    StatusBar* _bar;
 };
 
 class RilScreen : public RilRequest
 {
 public:
-    RilScreen(ubus_subscriber &subscriber, uint32_t &ubus_id, ubus_context *ubus);
+    RilScreen(ubus_subscriber &subscriber,
+              uint32_t &ubus_id, ubus_context *ubus);
 
     virtual
     ~RilScreen();
@@ -91,7 +84,8 @@ public:
 class RilRegistration : public RilRequest
 {
 public:
-    RilRegistration(ubus_subscriber &subscriber, uint32_t &ubus_id, ubus_context *ubus, StatusBar *bar);
+    RilRegistration(ubus_subscriber &subscriber,
+                    uint32_t &ubus_id, ubus_context *ubus);
 
     virtual
     ~RilRegistration();
@@ -102,34 +96,6 @@ public:
     virtual int
     Callback(ubus_request *req, blob_attr *msg);
 
-    virtual void
-    Indication(uint32_t &id, void *data, int len);
-
-private:
-    struct RegState {
-        unsigned int reg_state;
-        RIL_RadioTechnology radio_tech;
-    };
-
-    bool
-    registered_voice();
-
-    bool
-    registered_data();
-
-    CellularTechState
-    tech();
-
-    const char *
-    tech_to_str();
-
-    int
-    convertDbmToRssi(int rsrp);
-
-    int _rssi;
-    RegState _data;
-    RegState _voice;
-    StatusBar* _bar;
 };
 
 };

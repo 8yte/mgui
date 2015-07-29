@@ -20,6 +20,12 @@ public:
 	virtual
 	~HomeScreen();
 
+	void
+	SetCellularInfo(const std::string &text);
+
+	void
+	SetWirelessInfo(const std::string &text);
+
 private:
 	ilixi::ToolButton* _cellular;
 	ilixi::ToolButton* _wireless;
