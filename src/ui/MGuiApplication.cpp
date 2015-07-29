@@ -28,7 +28,7 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	_homeButton->setDrawFrame(false);
 	_homeButton->setToolButtonStyle(ilixi::ToolButton::IconAboveText);
 	_homeButton->sigClicked.connect(sigc::bind<int>(sigc::mem_fun(this, &MGuiApplication::switchScreen), 0));
-	_homeButton->setIcon(DATADIR"/themes/mgui/home.png", ilixi::Size(24, 24));
+	_homeButton->setIcon(DATADIR"/themes/mgui/home.png", ilixi::Size(30, 30));
 	addWidget(_homeButton);
 
 	_hawkButton = new ilixi::ToolButton("");
@@ -37,31 +37,31 @@ MGuiApplication::MGuiApplication(int argc, char* argv[])
 	_hawkButton->setDrawFrame(false);
 	_hawkButton->setToolButtonStyle(ilixi::ToolButton::IconAboveText);
 	_hawkButton->sigClicked.connect(sigc::bind<int>(sigc::mem_fun(this, &MGuiApplication::switchScreen), 1));
-	_hawkButton->setIcon(DATADIR"/themes/mgui/home.png", ilixi::Size(24, 24));
-  addWidget(_hawkButton);
+	_hawkButton->setIcon(DATADIR"/themes/mgui/hawk.png", ilixi::Size(30, 30));
+	addWidget(_hawkButton);
 
-  _statButton = new ilixi::ToolButton("");
-  _statButton->setGeometry(118, 224, 56, 56);
-  _statButton->setCheckable(true);
-  _statButton->setDrawFrame(false);
-  _statButton->setToolButtonStyle(ilixi::ToolButton::IconAboveText);
-  _statButton->sigClicked.connect(sigc::bind<int>(sigc::mem_fun(this, &MGuiApplication::switchScreen), 2));
-  _statButton->setIcon(DATADIR"/themes/mgui/home.png", ilixi::Size(24, 24));
-  addWidget(_statButton);
+	_statButton = new ilixi::ToolButton("");
+	_statButton->setGeometry(118, 224, 56, 56);
+	_statButton->setCheckable(true);
+	_statButton->setDrawFrame(false);
+	_statButton->setToolButtonStyle(ilixi::ToolButton::IconAboveText);
+	_statButton->sigClicked.connect(sigc::bind<int>(sigc::mem_fun(this, &MGuiApplication::switchScreen), 2));
+	_statButton->setIcon(DATADIR"/themes/mgui/statistics.png", ilixi::Size(30, 30));
+	addWidget(_statButton);
 
 	_homeScreen = new HomeScreen();
-  _homeScreen->setGeometry(0, 0, 480, 224);
-  addWidget(_homeScreen);
+	_homeScreen->setGeometry(0, 0, 480, 224);
+	addWidget(_homeScreen);
 
-  _hawkScreen = new HawkScreen();
-  _hawkScreen->setVisible(false);
-  _hawkScreen->setGeometry(0, 0, 480, 224);
-  addWidget(_hawkScreen);
+	_hawkScreen = new HawkScreen();
+	_hawkScreen->setVisible(false);
+	_hawkScreen->setGeometry(0, 0, 480, 224);
+	addWidget(_hawkScreen);
 
-  _statScreen = new StatScreen();
-  _statScreen->setVisible(false);
-  _statScreen->setGeometry(0, 0, 480, 224);
-  addWidget(_statScreen);
+	_statScreen = new StatScreen();
+	_statScreen->setVisible(false);
+	_statScreen->setGeometry(0, 0, 480, 224);
+	addWidget(_statScreen);
 
 #ifdef PXA1826
 	/* init pipe */

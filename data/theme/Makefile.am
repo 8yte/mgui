@@ -6,5 +6,7 @@ miscdata_DATA 	= bg.dfiff \
 				palette.xml \
 				style.xml \
 				ui-pack.dfiff \
-				home.png
+				home.png \
+				hawk.png \
+				statistics.png
 EXTRA_DIST 		= $(miscdata_DATA)
